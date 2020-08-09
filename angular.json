@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ScooterAdminMarket"
+    }
+  },
+  "defaultProject": "ScooterAdminMarket",
+  "cli": {
+    "analytics": false
+  }
 }

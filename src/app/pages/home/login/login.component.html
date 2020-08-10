@@ -4,8 +4,30 @@
     </figure>
     <section class="welcome__main">
         <h1>Bienvenido querido Comerciante</h1>
-        <form action="">
-            
+        <form class="welcome__form" (ngSubmit)="sendData()" [formGroup]="group">
+            <p>
+                <mat-form-field appearance="outline" class="input">
+                    <mat-label>Ingrese su correo electrónico</mat-label>
+                    <input matInput type="email" placeholder="ejemplo@ejemplo.com" formControlName="email">
+                </mat-form-field>
+                <ng-container *ngIf="group.get('email').errors && group.get('email').touched">
+                    <mat-error *ngIf="getInputError('email', 'required')">El correo electrónico es necesario.</mat-error>
+                    <mat-error *ngIf="getInputError('email', 'email')">El correo es inválido.</mat-error>
+                </ng-container>
+            </p>
+
+            <p>
+                <mat-form-field appearance="outline" class="input">
+                    <mat-label>Ingrese su contraseña</mat-label>
+                    <input matInput type="password" formControlName="password">
+                </mat-form-field>
+                <ng-container *ngIf="group.get('password').errors && group.get('password').touched">
+                    <mat-error *ngIf="getInputError('password', 'required')">La contraseña es necesaria.</mat-error>
+                    <mat-error *ngIf="getInputError('password', 'minLength')">La contraseña debe tener al menos 8 caractéres.</mat-error>
+                </ng-container>
+            </p>
+
+            <button mat-flat-button color="primary" type="submit">Ingresar</button>
         </form>
     </section>
 </article>

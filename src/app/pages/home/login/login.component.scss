@@ -1,0 +1,28 @@
+@import '../../../../styles.scss';
+
+.welcome {
+    @include box(75%, 70vh);
+    @extend .container--flex;
+    border-radius: var(--radius-block);
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.welcome::before, .welcome::after {
+    margin-right: 0;
+}
+
+.welcome__figure {
+    @include box(40%, 100%);
+}
+
+.welcome__figure img {
+    @include box(100%, 100%);
+    object-fit: cover;
+}
+
+.welcome__main {
+    @include box(60%, 100%);
+}
+

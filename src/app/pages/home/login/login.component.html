@@ -19,15 +19,15 @@
                     <div class="form-group">
                       <input type="email" formControlName="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Ingresa tu correo">
                       <ng-container *ngIf="group.get('email').errors && group.get('email').touched">
-                        <p *ngIf="getInputError('email')" class="text-error text-xs">El correo es necesario.</p>
-                        <p *ngId="getInputError('email', 'email')" class="text-error text-xs">El correo es inválido.</p>
+                        <p *ngIf="hasInputError('email')" class="text-error text-xs">El correo es requerido.</p>
+                        <p *ngId="hasInputError('email', 'email')" class="text-error text-xs">El correo es inválido.</p>
                       </ng-container>
                     </div>
                     <div class="form-group">
                       <input type="password" formControlName="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña">
                       <ng-container *ngIf="group.get('password').errors && group.get('password').touched">
-                        <p *ngIf="getInputError('password')" class="text-error text-xs">La contraseña es requerida.</p>
-                        <p *ngIf="getInputError('password', 'minLength')" class="text-error text-xs">La contraseña debe tener mínimo 8 caracteres.</p>
+                        <p *ngIf="hasInputError('password')" class="text-error text-xs">La contraseña es requerida.</p>
+                        <p *ngIf="hasInputError('password', 'minlength')" class="text-error text-xs">La contraseña debe tener mínimo 8 caracteres.</p>
                       </ng-container>
                     </div>
                     <div class="form-group">

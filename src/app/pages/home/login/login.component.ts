@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
    * @param inputName Form control name.
    * @param errorType Error code.
    */
-  getInputError(inputName: string, errorType = 'required'): any {
-    return this.group.get(inputName).getError(errorType);
+  hasInputError(inputName: string, errorCode = 'required'): any {
+    return this.group.get(inputName).getError(errorCode);
   }
 }

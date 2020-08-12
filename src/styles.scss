@@ -13,7 +13,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $ScooterAdminMarket-primary: mat-palette($mat-indigo);
-$ScooterAdminMarket-accent: mat-palette($mat-pink, A200, A100, A400);
+$ScooterAdminMarket-accent: mat-palette($mat-orange, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $ScooterAdminMarket-warn: mat-palette($mat-red);
@@ -34,6 +34,7 @@ $ScooterAdminMarket-theme: mat-light-theme((
 @include angular-material-theme($ScooterAdminMarket-theme);
 
 /* You can add global styles to this file, and also import other style files */
+@import './assets/scss/sb-admin-2.scss';
 
 :root {
     /* Primary Colors */

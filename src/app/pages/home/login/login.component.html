@@ -1,34 +1,58 @@
-<article class="welcome">
-    <figure class="welcome__figure">
-        <img src="../../../../assets/img/logo_central.jpg" alt="logo">
-    </figure>
-    <section class="welcome__main">
-        <h1>Bienvenido querido Comerciante</h1>
-        <form class="welcome__form" (ngSubmit)="sendData()" [formGroup]="group">
-            <p>
-                <mat-form-field appearance="outline" class="input">
-                    <mat-label>Ingrese su correo electrónico</mat-label>
-                    <input matInput type="email" placeholder="ejemplo@ejemplo.com" formControlName="email">
-                </mat-form-field>
-                <ng-container *ngIf="group.get('email').errors && group.get('email').touched">
-                    <mat-error *ngIf="getInputError('email', 'required')">El correo electrónico es necesario.</mat-error>
-                    <mat-error *ngIf="getInputError('email', 'email')">El correo es inválido.</mat-error>
-                </ng-container>
-            </p>
+<div class="container">
 
-            <p>
-                <mat-form-field appearance="outline" class="input">
-                    <mat-label>Ingrese su contraseña</mat-label>
-                    <input matInput type="password" formControlName="password">
-                </mat-form-field>
-                <ng-container *ngIf="group.get('password').errors && group.get('password').touched">
-                    <mat-error *ngIf="getInputError('password', 'required')">La contraseña es necesaria.</mat-error>
-                    <mat-error *ngIf="getInputError('password', 'minLength')">La contraseña debe tener al menos 8 caractéres.</mat-error>
-                </ng-container>
-            </p>
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
 
-            <button mat-flat-button color="primary" type="submit">Ingresar</button>
-        </form>
-    </section>
-</article>
+      <div class="col-xl-10 col-lg-12 col-md-9">
 
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Bienvenido querido comerciante!</h1>
+                  </div>
+                  <form class="user" [formGroup]="group" (ngSubmit)="sendData()">
+                    <div class="form-group">
+                      <input type="email" formControlName="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Ingresa tu correo">
+                      <ng-container *ngIf="group.get('email').errors && group.get('email').touched">
+                        <p *ngIf="getInputError('email')" class="text-error text-xs">El correo es necesario.</p>
+                        <p *ngId="getInputError('email', 'email')" class="text-error text-xs">El correo es inválido.</p>
+                      </ng-container>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" formControlName="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña">
+                      <ng-container *ngIf="group.get('password').errors && group.get('password').touched">
+                        <p *ngIf="getInputError('password')" class="text-error text-xs">La contraseña es requerida.</p>
+                        <p *ngIf="getInputError('password', 'minLength')" class="text-error text-xs">La contraseña debe tener mínimo 8 caracteres.</p>
+                      </ng-container>
+                    </div>
+                    <div class="form-group">
+                      <div class="custom-control custom-checkbox small">
+                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <label class="custom-control-label" for="customCheck">Recuerdame</label>
+                      </div>
+                    </div>
+                    <button [disabled]="group.invalid" type="submit" class="btn btn-primary btn-user btn-block">
+                      Iniciar sesión
+                    </button>
+                    <hr>
+                  </form>
+                  <hr>
+                  <div class="text-center">
+                    <a class="small" [routerLink]="['forgot']">¿Olvidaste la contraseña?</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>

@@ -1,8 +1,6 @@
 @import '../../../styles.scss';
 
 .window {
-    @extend .container--flex;
     @include box(100%, 100vh);
-    @include flexContent(center, center);
     background: linear-gradient(45deg, var(--color-primary), var(--color-primary-dark));
 }

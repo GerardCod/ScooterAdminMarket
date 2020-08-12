@@ -1,8 +1,6 @@
-# ScooterAdminMarket
+# Scooter Admin
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
-
-ScooterAdminMarket is a WebApp made for work with the Scooter mobile app.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
 
 ## Development server
 

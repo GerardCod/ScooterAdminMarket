@@ -1,0 +1,392 @@
+<div class="image-container set-full-height" style="background-color: #f8f8f8;">
+  <div class="header-content">
+    <!--     <img class="logo" src="assets/images/common/icon-findots.jpg" alt="">
+ -->
+    <span class="name">Scooter</span>
+  </div>
+  <div class="container">
+    <!--   -->
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-11">
+
+        <div class="card card-wizard">
+
+          <div class="header-wizard">
+            <h3 class="title">Hola {{station.station_name}}!, Completa tu información</h3>
+            <span class="category">Esta información nos ayudara a personalizar mas tu central</span>
+          </div>
+
+          <!-- PROGRESS WITH ICON-wizardS  -->
+          <div class="wizard-navigation">
+
+            <div class="content-progress">
+              <div class="progress progress-wizard">
+                <div id="progress-wizard" class="progress-bar" style="width: 21%;" role="progressbar" aria-valuenow="75"
+                  aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+            </div>
+
+            <ul class="ul-wizard">
+
+              <li class="li-wizard" #element [attr.data-index]="step.id" [attr.data-component]="step.component"
+                (click)="onNext(element)" *ngFor="let step of steps">
+                <div class="icon-wizard">
+                  <i class="{{step.icon}}"></i>
+                </div>
+                <p class="info-text">{{step.text}}</p>
+              </li>
+
+            </ul>
+
+          </div>
+
+          <!-- TAB CONTENT  -->
+          <div class="content-page">
+
+            <!-- START DIV IMAGE ============== -->
+            <div id="div-general" class="content-tab content">
+              <div class="row">
+                <div class="col-lg-6 col-step-image">
+
+                  <p class="title-component">Agrega una imagen para tu negocío</p>
+                  <!-- Image ========= -->
+
+                  <div class="image-content">
+                    <img *ngIf="!binaryString" src="assets/images/common/no-image.png" alt="">
+                    <img *ngIf="binaryString" [src]="binaryString" alt="">
+                  </div>
+
+
+                  <div class="button-select-image">
+                    <input (change)="onFileSelected($event)" #myInput type="file" name="file" id="file"
+                      class="inputfile inputfile-1" />
+                    <label for="file">
+                      <span>Seleccionar imagen</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-lg-6" *ngIf="services">
+                  <p class="title-component">¿Que servicios ofreces?</p>
+                  <!-- list of services  -->
+                  <div class="row d-flex justify-content-center">
+                    <div class="col-sm-6" *ngFor="let service of services; let i = index">
+                      <app-card-service [service]="service" [index]="i" (addRateService)="addRateService($event)">
+                      </app-card-service>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- END DIV IMAGE ============  -->
+            <!-- DIV CATEGORIES  -->
+            <div id="div-categories" class="content-tab content">
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <p class="title-component">¿Cuales son tus tarifas?</p>
+                </div>
+
+                <!-- Rate forms  -->
+                <form [formGroup]="ratesServicesForm">
+                  <div class="row d-flex justify-content-around">
+                    <!-- ADD RATE  -->
+                    <div formArrayName="services"
+                      *ngFor="let serviceForm of rateServiceFormData.controls; let i = index;"
+                      class="col-lg-5 card p-3">
+                      <p style="color: #ff9d09de;">Tarifa para {{(serviceForm.get('service_name').value) | lowercase}}
+                      </p>
+                      <div class="row" [formGroupName]="i">
+                        <!--   -->
+                        <div class="col-sm-6 col-sm-offset-1">
+                          <div class="form-group">
+                            <label>Precio base</label>
+                            <input formControlName="base_rate_price" class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(serviceForm, 'base_rate_price'),
+                            'has-success valid': isFieldValid(serviceForm, 'base_rate_price')}" type="number">
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(serviceForm, 'base_rate_price')">
+                              <span *ngIf="isFieldHasError(serviceForm, 'base_rate_price','required')">Este campo es
+                                requerido</span>
+                            </div>
+                          </div>
+                        </div>
+                        <!--   -->
+                        <div class="col-sm-6 col-sm-offset-1">
+                          <div class="form-group">
+                            <label>Desde el KM</label>
+                            <input readonly formControlName="from_kilometer" class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(serviceForm, 'from_kilometer'),
+                            'has-success valid': isFieldValid(serviceForm, 'from_kilometer')}" type="number"
+                              class="form-control-eco w-100">
+
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(serviceForm, 'from_kilometer')">
+                              <span *ngIf="isFieldHasError(serviceForm, 'from_kilometer','required')">Este campo es
+                                requerido</span>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6 col-sm-offset-1">
+                          <div class="form-group">
+                            <label>Hasta el KM</label>
+                            <input formControlName="to_kilometer" type="number" class="form-control-eco w-100"
+                              [ngClass]="{'has-error error': isFieldInvalid(serviceForm, 'to_kilometer'),
+                            'has-success valid': isFieldValid(serviceForm, 'to_kilometer')}">
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(serviceForm, 'to_kilometer')">
+                              <span *ngIf="isFieldHasError(serviceForm, 'to_kilometer','required')">Este campo es
+                                requerido</span>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        <!--   -->
+                        <div class="col-sm-6 col-sm-offset-1">
+                          <div class="form-group">
+                            <label>Precio por KM</label>
+                            <input formControlName="price_kilometer" type="number" class="form-control-eco w-100"
+                              class="form-control-eco w-100" [ngClass]="{'has-error error': isFieldInvalid(serviceForm, 'price_kilometer'),
+                            'has-success valid': isFieldValid(serviceForm, 'price_kilometer')}">
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(serviceForm, 'price_kilometer')">
+                              <span *ngIf="isFieldHasError(serviceForm, 'price_kilometer','required')">Este campo es
+                                requerido</span>
+                            </div>
+                          </div>
+                        </div>
+                        <!--   -->
+
+                      </div>
+                      <!--   -->
+                    </div>
+                    <!-- END ADD RATE  -->
+                  </div>
+
+                </form>
+
+              </div>
+
+            </div>
+            <!-- DIV ADDRESS  -->
+            <div id="div-map" class="content-tab content">
+              <div class="row">
+                <div class="col-lg-12">
+                  <p class="title-component">Agrega la ubicación de tu central.</p>
+                </div>
+                <!-- FORM GROUP  -->
+                <div class="col-lg-7">
+                  <form [formGroup]="addressForm">
+
+                    <div class="row">
+                      <div class="col-sm-6 col-sm-offset-1">
+                        <div class="form-group">
+                          <label>Calle *</label>
+                          <input  formControlName="street" type="text" class="form-control-eco w-100"
+                          [ngClass]="{'has-error error': isFieldInvalid(addressForm, 'street'),
+                            'has-success valid': isFieldValid(addressForm, 'street')}">
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(addressForm, 'street')">
+                              <span *ngIf="isFieldHasError(addressForm, 'street','required')">Este campo es
+                                requerido</span>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-6 col-sm-offset-1">
+                        <div class="form-group">
+                          <label>Colonia *</label>
+                          <input formControlName="suburb" type="text" class="form-control-eco w-100"
+                          [ngClass]="{'has-error error': isFieldInvalid(addressForm, 'suburb'),
+                            'has-success valid': isFieldValid(addressForm, 'suburb')}">
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(addressForm, 'suburb')">
+                              <span *ngIf="isFieldHasError(addressForm, 'suburb','required')">Este campo es
+                                requerido</span>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-6 col-sm-offset-1">
+                        <div class="form-group">
+                          <label>Código postal *</label>
+                          <input formControlName="postal_code" type="numer" class="form-control-eco w-100"
+                          [ngClass]="{'has-error error': isFieldInvalid(addressForm, 'postal_code'),
+                            'has-success valid': isFieldValid(addressForm, 'postal_code')}">
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(addressForm, 'postal_code')">
+                              <span *ngIf="isFieldHasError(addressForm, 'postal_code','required')">Este campo es
+                                requerido</span>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-6 col-sm-offset-1">
+                        <div class="form-group">
+                          <label>Numero ext</label>
+                          <input formControlName="exterior_number" type="text" class="form-control-eco w-100"
+                          [ngClass]="{'has-error error': isFieldInvalid(addressForm, 'exterior_number'),
+                            'has-success valid': isFieldValid(addressForm, 'exterior_number')}">
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(addressForm, 'exterior_number')">
+                              <span *ngIf="isFieldHasError(addressForm, 'exterior_number','required')">Este campo es
+                                requerido</span>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-6 col-sm-offset-1">
+                        <div class="form-group">
+                          <label>Numero int</label>
+                          <input formControlName="inside_number" type="text" class="form-control-eco w-100"
+                          [ngClass]="{'has-error error': isFieldInvalid(addressForm, 'inside_number'),
+                            'has-success valid': isFieldValid(addressForm, 'inside_number')}">
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(addressForm, 'inside_number')">
+                              <span *ngIf="isFieldHasError(addressForm, 'inside_number','required')">Este campo es
+                                requerido</span>
+                            </div>
+                        </div>
+                      </div>
+
+
+                      <div class="col-sm-6 col-sm-offset-1">
+                        <div class="form-group">
+                          <label>Referencias</label>
+                          <input formControlName="references" type="text" class="form-control-eco w-100"
+                          [ngClass]="{'has-error error': isFieldInvalid(addressForm, 'references'),
+                            'has-success valid': isFieldValid(addressForm, 'references')}">
+                            <!-- MESSAGES ERRORS  -->
+                            <div class="invalid-feedback-form" *ngIf="isFieldInvalid(addressForm, 'references')">
+                              <span *ngIf="isFieldHasError(addressForm, 'references','required')">Este campo es
+                                requerido</span>
+                            </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </form>
+
+                </div>
+                <!-- MAP  -->
+                <div class="col-lg-5">
+                  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false"
+                    [zoomControl]="true" (mapClick)="setMarkerMap($event)">
+                    <agm-marker *ngIf="currentMarker" [latitude]="currentMarker.lat" [longitude]="currentMarker.lng" [label]="'C'">
+                    </agm-marker>
+                    <!-- <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)"
+                      [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable"
+                      (dragEnd)="markerDragEnd(m, $event)">
+
+                      <agm-info-window>
+                        <strong>InfoWindow content</strong>
+                      </agm-info-window>
+
+                    </agm-marker> -->
+
+                  </agm-map>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- DIV CONFIG  -->
+            <div id="div-config" class="content-tab content">
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <p class="title-component">Configuración general del programa</p>
+                </div>
+                <div class="col-lg-12 my-3">
+                    <div class="row d-flex justify-content-around">
+
+                      <div class="col-lg-6">
+                        <label>Horario de atencion</label>
+                        <div class="list-schedules" *ngIf="schedules">
+                          <!-- Schedules list of components  -->
+                          <app-schedule *ngFor="let schedule of schedules"
+                          [schedule]="schedule" (addSchedule)="addSchedule($event)"
+                          ></app-schedule>
+                        </div>
+                      </div>
+
+                      <!-- SWITCHS  -->
+                      <div class="col-lg-6 col-switches">
+                        <label>Mas opciones</label>
+                        <ul class="list-group">
+                          <li class="list-group-item">
+
+                            <div class="option">
+                              <div class="text">
+                                Asignar repartidor manualmente
+                              </div>
+                              <mat-slide-toggle [checked]="false" [(ngModel)]="assignDeliveryManually"></mat-slide-toggle>
+                            </div>
+
+                          </li>
+
+                          <li class="list-group-item">
+
+                            <div class="option">
+                              <div class="text">
+                                Permitir cancelaciones
+                              </div>
+                              <mat-slide-toggle [checked]="true" [(ngModel)]="allowCancellations"></mat-slide-toggle>
+                            </div>
+
+                          </li>
+
+                        </ul>
+                        
+                        <div class="btns my-5 d-flex justify-content-end">
+                          <button [disabled]="loadingUpdateConfig" (click)="saveConfig()" class="btn btn-secondary">Guardar información</button>
+                          <div *ngIf="loadingUpdateConfig" class="spinner-border text-warning mx-3" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div>
+                        </div>
+
+                       
+
+                      </div>
+
+                      <!--   -->
+
+                    </div>
+                    <!--   -->
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div class="footer">
+    <div>
+      <button (click)="onPrevious()" *ngIf="hasPrevious" class="btn-previous">Anterior</button>
+    </div>
+    <div>
+      <span style="color: white;">Toda la información podra cambiarse mas adelante</span>
+    </div>
+
+    <div>
+      <button (click)="onNext()" *ngIf="hasNext" class="btn-next-step">Siguiente</button>
+    </div>
+
+  </div>

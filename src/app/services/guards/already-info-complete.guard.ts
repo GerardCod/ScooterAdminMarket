@@ -14,9 +14,9 @@ export class AlreadyInfoCompleteGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
      // Verify that the station exists and does not have a complete configuration  ========
 
-     const station = JSON.parse(localStorage.getItem('station'));
-     if (station) {
-       if (station.information_is_complete) {
+     const merchant = JSON.parse(localStorage.getItem('merchant'));
+     if (merchant) {
+       if (merchant.information_is_complete) {
            this.router.navigate(['/dashboard/']);
            return false;
        }

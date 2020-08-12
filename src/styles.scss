@@ -20,13 +20,7 @@ $ScooterAdminMarket-warn: mat-palette($mat-red);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$ScooterAdminMarket-theme: mat-light-theme((
-  color: (
-    primary: $ScooterAdminMarket-primary,
-    accent: $ScooterAdminMarket-accent,
-    warn: $ScooterAdminMarket-warn,
-  )
-));
+$ScooterAdminMarket-theme: mat-light-theme($ScooterAdminMarket-primary, $ScooterAdminMarket-accent, $ScooterAdminMarket-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component

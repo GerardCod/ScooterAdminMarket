@@ -1,0 +1,6 @@
+@import '../../../styles.scss';
+
+.window {
+    @include box(100%, 100vh);
+    background: linear-gradient(45deg, var(--color-primary), var(--color-primary-dark));
+}

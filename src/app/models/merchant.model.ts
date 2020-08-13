@@ -7,7 +7,7 @@ export class Merchant {
         public is_delibery_by_store: boolean,
         public merchant_name: string,
         public phone_number: string,
-        public picture: any,
+        public picture: string,
         public reputation: number,
         public subcategory: string,
         public user: User

@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('station');
+    localStorage.removeItem('merchant');
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     this.router.navigate(['/auth/']);

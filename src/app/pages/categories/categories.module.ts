@@ -9,6 +9,7 @@ import { InfoCategoryComponent } from './info-category/info-category.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
     CommonModule,
     CategoriesRoutingModule,
     SharedModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CategoriesModule { }

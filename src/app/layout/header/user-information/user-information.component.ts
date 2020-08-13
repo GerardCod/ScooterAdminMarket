@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Merchant } from 'src/app/models/merchant.model';
 
 @Component({
   selector: 'app-user-information',
@@ -8,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserInformationComponent implements OnInit {
 
-  @Input() station;
+  @Input() merchant: Merchant;
 
   constructor(private authService: AuthService) { }
 

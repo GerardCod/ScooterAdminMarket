@@ -3,4 +3,32 @@
         <h1 class="h3 mb-0 text-gray-800">Nueva categoría</h1>
         <a class="text--danger margin-left-1rem" [routerLink]="['/categories']">Regresar</a>
     </div>
+
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 p-5">
+                            <form [formGroup]="group" class="user" (ngSubmit)="sendData()">
+                                <div class="form-group">
+                                    <input formControlName="name" [ngClass]="{'is-invalid': isFieldInvalid(group, 'name'), 'is-valid': !isFieldInvalid(group, 'name')}" type="text" class="form-control form-control-user" placeholder="Ingresa el nombre de la nueva categoría">
+                                    <!-- MESSAGES ERRORS  -->
+                                    <div class="invalid-feedback">
+                                        <span *ngIf="hasFieldError(group, 'name','required')">El nombre es requerido</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" class="form-control form-control-user" placeholder="Elige una imagen">
+                                </div>
+                                <button [disabled]="group.invalid" class="btn btn-primary btn-user btn-block">
+                                    <span>Agregar categoría</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

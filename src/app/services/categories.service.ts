@@ -19,4 +19,8 @@ export class CategoriesService {
   getCategories(params = {}): Observable<any> {
     return this.http.get(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/`, params);
   }
+
+  addCategory(category: Category): Observable<any> {
+    return this.http.post(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/`, {...category});
+  }
 }

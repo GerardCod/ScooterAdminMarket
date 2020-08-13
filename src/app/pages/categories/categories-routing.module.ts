@@ -7,8 +7,9 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 
 const routes: Routes = [
   { path: '', component: CategoryListComponent },
-  { path: '/category/:id', component: InfoCategoryComponent },
-  { path: 'add', component: AddCategoryComponent }
+  { path: 'category/:id', component: InfoCategoryComponent },
+  { path: 'add', component: AddCategoryComponent },
+  {path: 'modify/:id', component: AddCategoryComponent}
 ];
 
 @NgModule({

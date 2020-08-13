@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/category.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-category',
@@ -12,17 +13,38 @@ import { Subscription } from 'rxjs';
 export class AddCategoryComponent implements OnInit, OnDestroy {
   builder: FormBuilder = new FormBuilder();
   group: FormGroup;
-  addCategorySubscription: Subscription;
+  category: Category;
+  id: number;
+  imageURL: string;
+  storeDataSubscription: Subscription;
+  categorySubscription: Subscription;
 
-  constructor(private categoriesService: CategoriesService) {
+  constructor(private categoriesService: CategoriesService, private route: ActivatedRoute) {
     this.buildForm();
+    this.id = this.route.snapshot.params.id;
+    console.log(this.id);
   }
 
   ngOnInit(): void {
+    if (this.id) {
+      this.categorySubscription = this.categoriesService
+      .getCategoryById(Number(this.id))
+      .subscribe((data: Category) => {
+        this.category = data;
+        console.log(this.category);
+        this.group.get('name').setValue(this.category.name);
+      });
+    }
   }
 
   ngOnDestroy(): void {
-    this.addCategorySubscription.unsubscribe();
+    if (this.storeDataSubscription) {
+      this.storeDataSubscription.unsubscribe();
+    }
+
+    if (this.categorySubscription) {
+      this.categorySubscription.unsubscribe();
+    }
   }
 
   buildForm(): void {
@@ -40,15 +62,43 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   }
 
   sendData(): void {
-    const newCategory: Category = {
+    this.category = {
       name: this.group.get('name').value,
     }
 
-    this.addCategorySubscription = this.categoriesService.addCategory(newCategory)
+    if (this.imageURL) {
+      this.category.picture = this.imageURL;
+    }
+
+    if (this.id) {
+      this.category.id = this.id;
+      this.updateCategory(this.category);
+    } else {
+      this.saveCategory(this.category);
+    }
+  }
+
+  saveCategory(category: Category): void {
+    this.storeDataSubscription = this.categoriesService.addCategory(category)
     .subscribe((data: any) => {
       console.log(data);
     }, (error: any) => {
       console.error(error);
     });
+  }
+
+  updateCategory(category: Category): void {
+    this.storeDataSubscription = this.categoriesService.updateCategory(category)
+    .subscribe((data: any) => { console.log(data); },
+    (error: any) => { console.error(error); });
+  }
+
+  handlePickUpImage(event: any): void {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.imageURL = String(reader.result);
+    }
   }
 }

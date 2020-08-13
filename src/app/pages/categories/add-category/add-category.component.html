@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-flex-start mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Nueva categoría</h1>
+        <h1 class="h3 mb-0 text-gray-800">Datos de la categoría</h1>
         <a class="text--danger margin-left-1rem" [routerLink]="['/categories']">Regresar</a>
     </div>
 
@@ -19,10 +19,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="file" class="form-control form-control-user" placeholder="Elige una imagen">
+                                    <input type="file" class="form-control form-control-user" placeholder="Elige una imagen" (change)="handlePickUpImage($event)">
                                 </div>
+                                <img *ngIf="imageURL" class="img-fluid" [src]="imageURL" alt="category_picture">
+                                <hr>
                                 <button [disabled]="group.invalid" class="btn btn-primary btn-user btn-block">
-                                    <span>Agregar categoría</span>
+                                    <span>Guardar datos</span>
                                 </button>
                             </form>
                         </div>

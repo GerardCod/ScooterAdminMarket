@@ -3,15 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
 import { map } from 'rxjs/operators';
+import { Merchant } from '../models/merchant.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriesService {
+  merchant: Merchant;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.merchant = JSON.parse(localStorage.getItem('merchant'));
+  }
 
-  getCategories(params = {}): Observable<Category[]> {
-    return this.http.get('', params).pipe(map((categories: Category[]) => categories));
+  getCategories(params = {}): Observable<any> {
+    return this.http.get(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/`, params);
   }
 }

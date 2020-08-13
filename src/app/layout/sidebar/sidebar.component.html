@@ -4,7 +4,7 @@
     <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/dashboard" routerLinkActive="active">
         <div>
         </div>
-        <p> {{ station.station_name |slice:0:1 |lowercase }} </p>
+        <p> {{ merchant.merchant_name |slice:0:1 |lowercase }} </p>
         <div style="font-family: 'slant'; font-size: 150%;" class="sidebar-brand-text mx-3">SCOOTER</div>
     </a>
     <!-- Divider -->
@@ -86,10 +86,10 @@
 
 
     <!-- Nav Item - Map the traicing Collapse Menu -->
-    <li class="nav-item" routerLink="/traicing" routerLinkActive="active">
+    <li class="nav-item" routerLink="/categories" routerLinkActive="active">
         <a class="nav-link collapsed">
-            <i class="fas fa-fw fa-map"></i>
-            <span>Mapa de seguimiento</span>
+            <i class="fas fa-fw fa-tag"></i>
+            <span>Categorías</span>
         </a>
     </li>
     <!-- Fin Nav Item - Map the traicing Collapse Menu -->

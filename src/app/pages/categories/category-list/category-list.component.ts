@@ -37,23 +37,27 @@ export class CategoryListComponent implements OnInit, OnDestroy {
     this.categoriesSubscription.unsubscribe();
   }
 
-  getCategories(params = {}): void {
-    this.categoriesSubscription = this.categoriesService
-    .getCategories(params, 1)
-    .subscribe((data: any) => {
-      this.categories = data.results;
-      this.length = data.count;
-    });
-  }
-
   searchBy(search: string): void {
     this.params.search = search;
-    this.getCategories(this.params.search);
+    this.getCategories(this.params);
   }
 
   orderBy(orderValue: string): void {
     this.params.ordering = orderValue;
-    this.getCategories(this.params.ordering);
+    this.getCategories(this.params);
+  }
+
+  getCategories(params = {}): void {
+    if (this.categoriesSubscription) {
+      this.categoriesSubscription.unsubscribe();
+    }
+    this.categoriesSubscription = this.categoriesService
+    .getCategories(params, 1)
+    .subscribe((data: any) => {
+      console.log(data);
+      this.categories = data.results;
+      this.length = data.count;
+    });
   }
 
   getPage(e: any): PageEvent {

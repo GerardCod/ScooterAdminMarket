@@ -16,7 +16,8 @@ const routes: Routes = [
     loadChildren: () => import('./view-profile/view-profile.module').then(m => m.ViewProfileModule)
   },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'categories', loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule) }
+  { path: 'categories', loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule) },
+  { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) }
 ];
 
 @NgModule({

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/category.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-category',
@@ -19,7 +19,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   storeDataSubscription: Subscription;
   categorySubscription: Subscription;
 
-  constructor(private categoriesService: CategoriesService, private route: ActivatedRoute) {
+  constructor(private categoriesService: CategoriesService, private route: ActivatedRoute, private router: Router) {
     this.buildForm();
     this.id = this.route.snapshot.params.id;
     console.log(this.id);
@@ -81,7 +81,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   saveCategory(category: Category): void {
     this.storeDataSubscription = this.categoriesService.addCategory(category)
     .subscribe((data: any) => {
-      console.log(data);
+      this.router.navigate(['/categories']);
     }, (error: any) => {
       console.error(error);
     });
@@ -89,7 +89,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
 
   updateCategory(category: Category): void {
     this.storeDataSubscription = this.categoriesService.updateCategory(category)
-    .subscribe((data: any) => { console.log(data); },
+    .subscribe((data: any) => { this.router.navigate(['/categories']); },
     (error: any) => { console.error(error); });
   }
 

@@ -77,7 +77,7 @@
 
                         <tr *ngFor="let category of categories ">
                             <td> 
-                                <img *ngIf="category.picture" [src]="category.picture" alt="category_img">
+                                <img class="img-category img-profile rounded-circle" *ngIf="category.picture" [src]="category.picture" alt="category_img">
                             </td>
                             <td> {{category.name}} </td>
                             <td class="text-center">

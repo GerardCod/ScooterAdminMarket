@@ -39,7 +39,7 @@ export class CategoryListComponent implements OnInit, OnDestroy {
 
   getCategories(params = {}): void {
     this.categoriesSubscription = this.categoriesService
-    .getCategories(params)
+    .getCategories(params, 1)
     .subscribe((data: any) => {
       this.categories = data.results;
       this.length = data.count;

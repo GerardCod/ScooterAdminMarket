@@ -17,8 +17,8 @@ export class CategoriesService {
     this.merchant = JSON.parse(localStorage.getItem('merchant'));
   }
 
-  getCategories(params = {}): Observable<any> {
-    return this.http.get(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/`, params);
+  getCategories(params = {}, status: number): Observable<any> {
+    return this.http.get(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/?status=${status}`, params);
   }
 
   addCategory(category: Category): Observable<any> {

@@ -10,10 +10,11 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DeleteCategoryDialogComponent } from './delete-category-dialog/delete-category-dialog.component';
 
 
 @NgModule({
-  declarations: [CategoryListComponent, CardInfoComponent, ProductListComponent, InfoCategoryComponent, AddCategoryComponent],
+  declarations: [CategoryListComponent, CardInfoComponent, ProductListComponent, InfoCategoryComponent, AddCategoryComponent, DeleteCategoryDialogComponent],
   imports: [
     CommonModule,
     CategoriesRoutingModule,
@@ -21,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AngularMaterialModule,
     FormsModule,
     ReactiveFormsModule
-  ]
+  ],
+  entryComponents: [DeleteCategoryDialogComponent]
 })
 export class CategoriesModule { }

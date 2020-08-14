@@ -78,14 +78,14 @@
 
                         <tr *ngFor="let product of products ">
                             <td> 
-                                <img class="img-category img-profile rounded-circle" *ngIf="category.picture" [src]="category.picture" alt="category_img">
+                                <img class="img-category img-profile rounded-circle" *ngIf="product.picture" [src]="product.picture" alt="category_img">
                             </td>
                             <td> {{product.name}} </td>
-                            <td> {{product.category.name}}</td>
+                            <td> {{product.category_id}}</td>
                             <td> {{product.stock}}</td>
                             <td> {{product.price}}</td>
                             <td class="text-center">
-                                <button class="btn btn-mas" [routerLink]="['/categories', 'category', category.id]">
+                                <button class="btn btn-mas">
                                     <i class="fas fa-eye"></i>
                                 </button>
 

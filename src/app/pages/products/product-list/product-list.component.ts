@@ -3,6 +3,8 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Product } from 'src/app/models/product.model';
 import { Subscription } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
+import { Category } from 'src/app/models/category.model';
+import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'app-product-list',
@@ -11,7 +13,9 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[];
-  productsSubscription: Subscription
+  categories: Category[];
+  productsSubscription: Subscription;
+  categoriesSubscription: Subscription;
 
    // MatPaginator Inputs
    length = 100;
@@ -27,14 +31,20 @@ export class ProductListComponent implements OnInit, OnDestroy {
     ordering: ''
   }
 
-  constructor(private productService: ProductsService) { }
+  constructor(private productService: ProductsService, private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
     this.getProducts();
+    this.categoriesSubscription = this.categoriesService
+    .getCategories({},1)
+    .subscribe((data: any) => {
+      this.categories = data.results;
+    });
   }
 
   ngOnDestroy(): void {
     this.productsSubscription.unsubscribe();
+    this.categoriesSubscription.unsubscribe();
   }
 
   searchBy(search: string): void {

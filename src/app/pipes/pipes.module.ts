@@ -12,7 +12,8 @@ import { CategoryPipe } from './category.pipe';
     CommonModule
   ],
   exports: [
-    SplitWordPipe
+    SplitWordPipe,
+    CategoryPipe
   ]
 })
 export class PipesModule { }

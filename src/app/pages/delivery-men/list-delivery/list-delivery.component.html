@@ -52,8 +52,8 @@
         <div class="row" class="content">
             <!-- PAGINADOR  -->
             <div class="col-lg-12 d-flex justify-content-end">
-                <!-- <mat-paginator [disabled]="loadingDelivery || deliverys.length==0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPages($event)"> -->
-                <!-- </mat-paginator> -->
+                <mat-paginator [disabled]="loadingDelivery || deliverys.length==0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+                    </mat-paginator>
             </div>
             <!-- TERMINA EL PAGINADOR  -->
 
@@ -80,14 +80,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let delivery of [1,2,3] ">
-                            <td> Juan </td>
-                            <td> Castro </td>
-                            <td> 2381270938 </td>
-                            <td> 24 </td>
-                            <td> 5 </td>
-                            <td> Ver mas </td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>

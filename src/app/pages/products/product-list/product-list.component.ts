@@ -25,7 +25,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
    pageEvent: PageEvent;
 
    params = {
-    limit: 15,
+    limit: 1,
     offset: 0,
     search: '',
     ordering: ''
@@ -34,7 +34,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   constructor(private productService: ProductsService, private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getProducts(this.params);
     this.categoriesSubscription = this.categoriesService
     .getCategories({},1)
     .subscribe((data: any) => {

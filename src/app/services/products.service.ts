@@ -16,6 +16,7 @@ export class ProductsService {
   }
 
   getProducts(params = {}, status: number): Observable<any> {
+    console.log(params);
     return this.http.get(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/products/?status=${status}`, params);
   }
 
@@ -33,5 +34,9 @@ export class ProductsService {
 
   deleteProduct({id}: Product): Observable<any> {
     return this.http.delete(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/products/${id}/`);
+  }
+
+  unlockProduct({id}: Product): Observable<any> {
+    return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/products/${id}/unlock/`, {});
   }
 }

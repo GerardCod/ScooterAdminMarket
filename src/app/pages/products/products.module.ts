@@ -13,10 +13,11 @@ import { CardInfoComponent } from './info-product/card-info/card-info.component'
 import { DeleteProductDialogComponent } from './info-product/delete-product-dialog/delete-product-dialog.component';
 import { DisabledComponent } from './product-list/disabled/disabled.component';
 import { EnabledComponent } from './product-list/enabled/enabled.component';
+import { UnlockDialogComponent } from './product-list/unlock-dialog/unlock-dialog.component';
 
 
 @NgModule({
-  declarations: [ProductListComponent, AddProductComponent, InfoProductComponent, CardInfoComponent, DeleteProductDialogComponent, DisabledComponent, EnabledComponent],
+  declarations: [ProductListComponent, AddProductComponent, InfoProductComponent, CardInfoComponent, DeleteProductDialogComponent, DisabledComponent, EnabledComponent, UnlockDialogComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,
@@ -26,6 +27,6 @@ import { EnabledComponent } from './product-list/enabled/enabled.component';
     ReactiveFormsModule,
     PipesModule
   ],
-  entryComponents: [DeleteProductDialogComponent]
+  entryComponents: [DeleteProductDialogComponent, UnlockDialogComponent]
 })
 export class ProductsModule { }

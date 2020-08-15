@@ -5,33 +5,33 @@ import { ProductsService } from 'src/app/services/products.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-delete-product-dialog',
-  templateUrl: './delete-product-dialog.component.html',
-  styleUrls: ['./delete-product-dialog.component.scss']
+  selector: 'app-unlock-dialog',
+  templateUrl: './unlock-dialog.component.html',
+  styleUrls: ['./unlock-dialog.component.scss']
 })
-export class DeleteProductDialogComponent implements OnInit, OnDestroy {
+export class UnlockDialogComponent implements OnInit, OnDestroy {
   product: Product;
-  deleteSubscription: Subscription;
+  unlockProductSubscription: Subscription;
 
   constructor(
-    private productsService: ProductsService,
+    private productService: ProductsService,
     @Inject(MAT_DIALOG_DATA) private data: Product,
-    private dialogRef: MatDialogRef<DeleteProductDialogComponent>,
+    private dialogRef: MatDialogRef<UnlockDialogComponent>
   ) {
     this.product = this.data;
   }
-  
+
   ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
-    if (this.deleteSubscription) {
-      this.deleteSubscription.unsubscribe();
+    if (this.unlockProductSubscription) {
+      this.unlockProductSubscription.unsubscribe();
     }
   }
 
-  deleteProduct(): void {
-    this.deleteSubscription = this.productsService.deleteProduct(this.product)
+  unlockProduct() {
+    this.unlockProductSubscription = this.productService.unlockProduct(this.product)
     .subscribe((data: any) => {
       console.log(data);
       this.dialogRef.close();

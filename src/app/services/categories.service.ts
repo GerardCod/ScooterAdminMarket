@@ -36,4 +36,8 @@ export class CategoriesService {
   updateCategory(category: Category): Observable<any> {
     return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${category.id}/`, {...category});
   }
+
+  unlockCategory({id}: Category): Observable<any> {
+    return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${id}/unlock/`, {});
+  }
 }

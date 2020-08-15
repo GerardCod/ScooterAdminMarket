@@ -23,7 +23,7 @@ export class ProductsService {
     return this.http.post(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/products/`, {...product});
   }
 
-  getProductById({id}: Product): Observable<any> {
+  getProductById(id: number): Observable<any> {
     return this.http.get(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/products/${id}/`);
   }
 

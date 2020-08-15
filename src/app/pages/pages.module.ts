@@ -6,9 +6,7 @@ import { AngularMaterialModule } from '../shared/angular-material.module';
 
 
 @NgModule({
-  declarations: [
-
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     PagesRoutingModule,

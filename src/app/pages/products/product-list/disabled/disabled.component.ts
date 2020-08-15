@@ -30,7 +30,8 @@ export class DisabledComponent implements OnInit {
     limit: 15,
     offset: 0,
     search: '',
-    ordering: ''
+    ordering: '',
+    status: 2
   }
 
   constructor(
@@ -40,7 +41,7 @@ export class DisabledComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.categoriesSubscription = this.categoriesService.getCategories(this.params, 1)
+    this.categoriesSubscription = this.categoriesService.getCategories(this.params)
     .subscribe((data: any) => {
       this.categories = data.results;
     });
@@ -65,7 +66,7 @@ export class DisabledComponent implements OnInit {
     if (this.productsSubscription) {
       this.productsSubscription.unsubscribe();
     }
-    this.productsSubscription = this.productService.getProducts(params, 2)
+    this.productsSubscription = this.productService.getProducts(params)
     .subscribe((data: any) => {
       this.products = data.results;
     });

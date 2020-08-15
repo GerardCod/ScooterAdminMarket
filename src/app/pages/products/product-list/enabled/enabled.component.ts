@@ -28,18 +28,14 @@ export class EnabledComponent implements OnInit, OnDestroy {
     limit: 15,
     offset: 0,
     search: '',
-    ordering: ''
+    ordering: '',
+    status: 1
   }
 
-  constructor(private productService: ProductsService, private categoriesService: CategoriesService) { }
+  constructor(private productService: ProductsService) { }
 
   ngOnInit(): void {
     this.getProducts();
-    this.categoriesSubscription = this.categoriesService
-    .getCategories({},1)
-    .subscribe((data: any) => {
-      this.categories = data.results;
-    });
   }
 
   ngOnDestroy(): void {
@@ -61,7 +57,7 @@ export class EnabledComponent implements OnInit, OnDestroy {
     if (this.productsSubscription) {
       this.productsSubscription.unsubscribe();
     }
-    this.productsSubscription = this.productService.getProducts(params, 1)
+    this.productsSubscription = this.productService.getProducts(params)
     .subscribe((data: any) => {
       this.products = data.results;
     });

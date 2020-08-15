@@ -17,7 +17,8 @@ export class CategoryListComponent implements OnInit, OnDestroy {
     limit: 15,
     offset: 0,
     search: '',
-    ordering: ''
+    ordering: '',
+    status: 1
   }
 
    // MatPaginator Inputs
@@ -52,7 +53,7 @@ export class CategoryListComponent implements OnInit, OnDestroy {
       this.categoriesSubscription.unsubscribe();
     }
     this.categoriesSubscription = this.categoriesService
-    .getCategories(params, 1)
+    .getCategories(params)
     .subscribe((data: any) => {
       console.log(data);
       this.categories = data.results;

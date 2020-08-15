@@ -15,7 +15,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[];
   categories: Category[];
   productsSubscription: Subscription;
-  categoriesSubscription: Subscription;
 
    // MatPaginator Inputs
    length = 100;
@@ -28,23 +27,19 @@ export class ProductListComponent implements OnInit, OnDestroy {
     limit: 1,
     offset: 0,
     search: '',
-    ordering: ''
+    ordering: '',
+    status: 1
   }
 
-  constructor(private productService: ProductsService, private categoriesService: CategoriesService) { }
+  constructor(private productService: ProductsService) { }
 
   ngOnInit(): void {
     this.getProducts(this.params);
-    this.categoriesSubscription = this.categoriesService
-    .getCategories({},1)
-    .subscribe((data: any) => {
-      this.categories = data.results;
-    });
+   
   }
 
   ngOnDestroy(): void {
     this.productsSubscription.unsubscribe();
-    this.categoriesSubscription.unsubscribe();
   }
 
   searchBy(search: string): void {
@@ -61,7 +56,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     if (this.productsSubscription) {
       this.productsSubscription.unsubscribe();
     }
-    this.productsSubscription = this.productService.getProducts(params, 1)
+    this.productsSubscription = this.productService.getProducts(params)
     .subscribe((data: any) => {
       this.products = data.results;
     });

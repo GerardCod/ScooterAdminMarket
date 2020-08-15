@@ -15,9 +15,9 @@ export class ProductsService {
     this.merchant = JSON.parse(localStorage.getItem('merchant'));
   }
 
-  getProducts(params = {}, status: number): Observable<any> {
+  getProducts(params = {}): Observable<any> {
     console.log(params);
-    return this.http.get(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/products/?status=${status}`, params);
+    return this.http.get(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/products/`, params);
   }
 
   addProduct(product: Product): Observable<any> {

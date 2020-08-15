@@ -34,7 +34,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.categoriesSubscription = this.categoriesService
-    .getCategories({}, 1)
+    .getCategories({status: 1})
     .subscribe((data: any) => {
       this.categories = data.results;
     });

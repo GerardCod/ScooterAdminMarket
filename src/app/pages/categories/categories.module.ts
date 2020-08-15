@@ -11,10 +11,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteCategoryDialogComponent } from './delete-category-dialog/delete-category-dialog.component';
+import { EnabledComponent } from './category-list/enabled/enabled.component';
+import { DisabledComponent } from './category-list/disabled/disabled.component';
+import { UnlockDialogComponent } from './category-list/unlock-dialog/unlock-dialog.component';
 
 
 @NgModule({
-  declarations: [CategoryListComponent, CardInfoComponent, ProductListComponent, InfoCategoryComponent, AddCategoryComponent, DeleteCategoryDialogComponent],
+  declarations: [CategoryListComponent, CardInfoComponent, ProductListComponent, InfoCategoryComponent, AddCategoryComponent, DeleteCategoryDialogComponent, EnabledComponent, DisabledComponent, UnlockDialogComponent],
   imports: [
     CommonModule,
     CategoriesRoutingModule,

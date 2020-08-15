@@ -17,7 +17,7 @@ export class ProductsService {
 
   getProducts(params = {}): Observable<any> {
     console.log(params);
-    return this.http.get(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/products/`, params);
+    return this.http.get(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/products/`, { params });
   }
 
   addProduct(product: Product): Observable<any> {

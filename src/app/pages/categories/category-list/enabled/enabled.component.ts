@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Product } from 'src/app/models/product.model';
-import { Category } from 'src/app/models/category.model';
 import { Subscription } from 'rxjs';
+import { Category } from 'src/app/models/category.model';
 import { PageEvent } from '@angular/material/paginator';
-import { ProductsService } from 'src/app/services/products.service';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
@@ -12,17 +10,10 @@ import { CategoriesService } from 'src/app/services/categories.service';
   styleUrls: ['./enabled.component.scss']
 })
 export class EnabledComponent implements OnInit, OnDestroy {
-  products: Product[];
-  productsSubscription: Subscription;
- 
-   // MatPaginator Inputs
-   length = 100;
-   pageSize = 25;
-   pageSizeOptions: number[] = [25, 50, 75, 100];
-   // MatPaginator Output
-   pageEvent: PageEvent;
+  categoriesSubscription: Subscription;
+  categories: Category[];
 
-   params = {
+  params = {
     limit: 15,
     offset: 0,
     search: '',
@@ -30,45 +21,54 @@ export class EnabledComponent implements OnInit, OnDestroy {
     status: 1
   }
 
-  constructor(private productService: ProductsService) { }
+   // MatPaginator Inputs
+   length = 100;
+   pageSize = 25;
+   pageSizeOptions: number[] = [25, 50, 75, 100];
+   // MatPaginator Output
+   pageEvent: PageEvent;
+   
+  constructor(private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
-    this.getProducts(this.params);
+    this.getCategories(this.params);
   }
 
   ngOnDestroy(): void {
-    this.productsSubscription.unsubscribe();
+    this.categoriesSubscription.unsubscribe();
   }
 
   searchBy(search: string): void {
     this.params.search = search;
-    this.getProducts(this.params);
+    this.getCategories(this.params);
   }
 
   orderBy(orderValue: string): void {
     this.params.ordering = orderValue;
-    this.getProducts(this.params);
+    this.getCategories(this.params);
   }
 
-  getProducts(params = {}): void {
-    if (this.productsSubscription) {
-      this.productsSubscription.unsubscribe();
+  getCategories(params = {}): void {
+    if (this.categoriesSubscription) {
+      this.categoriesSubscription.unsubscribe();
     }
-    this.productsSubscription = this.productService.getProducts(params)
+    this.categoriesSubscription = this.categoriesService
+    .getCategories(params)
     .subscribe((data: any) => {
-      this.products = data.results;
+      console.log(data);
+      this.categories = data.results;
+      this.length = data.count;
     });
   }
 
   getPage(e: any): PageEvent {
-    if (this.products.length === 0) {
+    if (this.categories.length === 0) {
       this.pageSize = 25;
       return;
     }
 
     this.params.limit = e.pageSize;
     this.params.offset = this.params.limit * e.pageIndex;
-    this.getProducts(this.params);
+    this.getCategories(this.params);
   }
-
 }

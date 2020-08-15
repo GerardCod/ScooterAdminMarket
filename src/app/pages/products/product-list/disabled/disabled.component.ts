@@ -15,9 +15,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
 })
 export class DisabledComponent implements OnInit {
   products: Product[];
-  categories: Category[];
   productsSubscription: Subscription;
-  categoriesSubscription: Subscription;
 
    // MatPaginator Inputs
    length = 100;
@@ -37,15 +35,10 @@ export class DisabledComponent implements OnInit {
   constructor(
     private dialog: MatDialog, 
     private productService: ProductsService,
-    private categoriesService: CategoriesService
   ) { }
 
   ngOnInit(): void {
-    this.categoriesSubscription = this.categoriesService.getCategories(this.params)
-    .subscribe((data: any) => {
-      this.categories = data.results;
-    });
-    this.getProducts();
+    this.getProducts(this.params);
   }
 
   openDialog(product: Product): void {

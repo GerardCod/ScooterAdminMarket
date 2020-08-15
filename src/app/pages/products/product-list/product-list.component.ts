@@ -11,65 +11,11 @@ import { CategoriesService } from 'src/app/services/categories.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent implements OnInit, OnDestroy {
-  products: Product[];
-  categories: Category[];
-  productsSubscription: Subscription;
+export class ProductListComponent implements OnInit {
 
-   // MatPaginator Inputs
-   length = 100;
-   pageSize = 25;
-   pageSizeOptions: number[] = [25, 50, 75, 100];
-   // MatPaginator Output
-   pageEvent: PageEvent;
+  constructor() { }
 
-   params = {
-    limit: 1,
-    offset: 0,
-    search: '',
-    ordering: '',
-    status: 1
+  ngOnInit(): void {   
   }
 
-  constructor(private productService: ProductsService) { }
-
-  ngOnInit(): void {
-    this.getProducts(this.params);
-   
-  }
-
-  ngOnDestroy(): void {
-    this.productsSubscription.unsubscribe();
-  }
-
-  searchBy(search: string): void {
-    this.params.search = search;
-    this.getProducts(this.params);
-  }
-
-  orderBy(orderValue: string): void {
-    this.params.ordering = orderValue;
-    this.getProducts(this.params);
-  }
-
-  getProducts(params = {}): void {
-    if (this.productsSubscription) {
-      this.productsSubscription.unsubscribe();
-    }
-    this.productsSubscription = this.productService.getProducts(params)
-    .subscribe((data: any) => {
-      this.products = data.results;
-    });
-  }
-
-  getPage(e: any): PageEvent {
-    if (this.products.length === 0) {
-      this.pageSize = 25;
-      return;
-    }
-
-    this.params.limit = e.pageSize;
-    this.params.offset = this.params.limit * e.pageIndex;
-    this.getProducts(this.params);
-  }
 }

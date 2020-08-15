@@ -10,7 +10,7 @@
                 <div class="card-body p-0">
                     <div class="row justify-content-center">
                         <div class="col-lg-8 p-5">
-                            <form [formGroup]="group" class="user" (ngSubmit)="sendData()">
+                            <form [formGroup]="group" class="user" (ngSubmit)="sendData(group.value)">
                                 <div class="form-group">
                                     <input formControlName="name" [ngClass]="{'is-invalid': isFieldInvalid(group, 'name'), 'is-valid': isFieldValid(group, 'name')}" type="text" class="form-control form-control-user" placeholder="Ingresa el nombre de la nueva categoría">
                                     <!-- MESSAGES ERRORS  -->

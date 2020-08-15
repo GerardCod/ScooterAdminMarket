@@ -13,7 +13,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AddCategoryComponent implements OnInit, OnDestroy {
   builder: FormBuilder = new FormBuilder();
   group: FormGroup;
-  category: Category;
   id: number;
   imageURL: string;
   storeDataSubscription: Subscription;
@@ -30,9 +29,8 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
       this.categorySubscription = this.categoriesService
       .getCategoryById(Number(this.id))
       .subscribe((data: Category) => {
-        this.category = data;
-        console.log(this.category);
-        this.group.get('name').setValue(this.category.name);
+        this.group.get('name').setValue(data.name);
+        this.imageURL = data.picture;
       });
     }
   }
@@ -69,20 +67,18 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
     return (group.get(field).hasError(error));
   }
 
-  sendData(): void {
-    this.category = {
-      name: this.group.get('name').value,
-    }
+  sendData(category: Category): void {
 
-    if (this.imageURL) {
-      this.category.picture = this.imageURL;
+    if (!/'https'/.test(this.imageURL)) {
+      category.picture = this.imageURL;
     }
 
     if (this.id) {
-      this.category.id = this.id;
-      this.updateCategory(this.category);
+      category.id = this.id;
+      delete category.picture; 
+      this.updateCategory(category);
     } else {
-      this.saveCategory(this.category);
+      this.saveCategory(category);
     }
   }
 

@@ -11,10 +11,12 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 import { InfoProductComponent } from './info-product/info-product.component';
 import { CardInfoComponent } from './info-product/card-info/card-info.component';
 import { DeleteProductDialogComponent } from './info-product/delete-product-dialog/delete-product-dialog.component';
+import { DisabledComponent } from './product-list/disabled/disabled.component';
+import { EnabledComponent } from './product-list/enabled/enabled.component';
 
 
 @NgModule({
-  declarations: [ProductListComponent, AddProductComponent, InfoProductComponent, CardInfoComponent, DeleteProductDialogComponent],
+  declarations: [ProductListComponent, AddProductComponent, InfoProductComponent, CardInfoComponent, DeleteProductDialogComponent, DisabledComponent, EnabledComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,

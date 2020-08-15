@@ -89,13 +89,13 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   sendData(product: Product): void {
-    if (this.imageURL) {
+    if (!/'https'/.test(this.imageURL)) {
       product.picture = this.imageURL;
     }
 
     if (this.id) {
       product.id = this.id;
-      console.log(product);
+      delete product.picture;
       this.updateProduct(product);
     } else {
       this.saveProduct(product);

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AddDeliveryComponent } from '../add-delivery/add-delivery.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -34,6 +35,19 @@ export class ListDeliveryComponent implements OnInit {
       // width: '600px',
       // height: '700px',
       data: { delivery: null }
+    });
+  }
+
+
+  deleteDelivery() {
+    Swal.fire({
+      title: 'Bloquear',
+      text: `Esta seguro de bloquear a `,
+      type: 'warning',
+      showConfirmButton: true,
+      confirmButtonText: 'Bloquear',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
     });
   }
 

@@ -63,7 +63,7 @@ export class EnabledComponent implements OnInit, OnDestroy {
 
   getPage(e: any): PageEvent {
     if (this.categories.length === 0) {
-      this.pageSize = 25;
+      this.pageSize = 15;
       return;
     }
 

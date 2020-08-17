@@ -2,7 +2,6 @@ import { Component, OnInit, AfterContentInit, ElementRef, ViewChild } from '@ang
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ConfigAccountService } from 'src/app/services/config-account.service';
-import { ServiceModel } from 'src/app/models/service.model';
 import { ScheduleModel } from 'src/app/models/schedule.model';
 import { StationModel } from 'src/app/models/station.model';
 import { UpdateInfoStationModel } from 'src/app/models/update_info.model';
@@ -29,16 +28,15 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
   // Forms
   addressForm: FormGroup;
   ratesServicesForm: FormGroup;
-  servicesForm;
+  generalForm: FormGroup;
   // Data of services
-  services: Array<ServiceModel>;
   schedules: Array<ScheduleModel>;
   scheduleSelected = [];
   // Loaders
   loadingUpdateConfig: boolean;
 
   // Object to send update info
-  stationConfig: UpdateInfoStationModel = new UpdateInfoStationModel();
+  merchantConfig: UpdateInfoStationModel = new UpdateInfoStationModel();
   steps = [
     {
       id: 1,
@@ -49,22 +47,15 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
     },
     {
       id: 2,
-      text: 'Tarifas',
-      icon: 'fas fa-dollar-sign',
-      component: 'div-categories',
-      form: this.addressForm
-    },
-    {
-      id: 3,
       text: 'Dirección',
       icon: 'fas fa-map',
       component: 'div-map',
       form: null
     },
     {
-      id: 4,
-      text: 'Configuración',
-      icon: 'fas fa-cog',
+      id: 3,
+      text: 'Horario',
+      icon: 'far fa-clock',
       component: 'div-config',
       form: null
 
@@ -110,17 +101,12 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     this.station = JSON.parse(localStorage.getItem('station'));
-    this.getServices();
     this.getSchedules();
     this.buildRateServicefForm();
     this.buildAddressForm();
+    this.buildGeneralForm();
   }
 
-  // Get services availables
-  getServices() {
-    this.configService.getServices()
-      .subscribe((data: any) => this.services = data.data);
-  }
 
   getSchedules() {
     this.configService.getSchedules()
@@ -171,38 +157,18 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
 
   buildAddressForm() {
     this.addressForm = this._formBuilder.group({
-      street: [null, Validators.required],
-      suburb: [null, Validators.required],
-      postal_code: [null, Validators.required],
-      exterior_number: [null, Validators.required],
-      inside_number: [null],
-      references: [null]
+      full_address: [null, Validators.required]
     });
 
   }
 
-  // Event OUTPUT from card-wizard.ts
-  addRateService(event): void {
-    if (event.checked) {
-      this.servicesForm = this.ratesServicesForm.get('services') as FormArray;
-      this.servicesForm.push(this.createRateService(event.service_id, event.service_name));
-    } else {
-      this.deleteRateService(event.service_id);
-    }
-  }
-
-  createRateService(serviceId, serviceName): FormGroup {
-    return this._formBuilder.group({
-      service_id: [serviceId],
-      service_name: [serviceName],
-      base_rate_price: [null, Validators.required],
-      from_kilometer: [0, Validators.required],
-      to_kilometer: [null, Validators.required],
-      price_kilometer: [null, Validators.required]
+  buildGeneralForm() {
+    this.generalForm = this._formBuilder.group({
+      merchant_name: [null, Validators.required],
+      description: [null],
+      approximate_preparation_time: [null, Validators.required]
     });
   }
-
-  get rateServiceFormData(): any { return this.ratesServicesForm.get('services'); }
 
 
   deleteRateService(serviceId: any) {
@@ -251,7 +217,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       return;
     }
     this.loadingUpdateConfig = true;
-    this.configService.updateInfo(this.stationConfig)
+    this.configService.updateInfo(this.merchantConfig)
       .subscribe((data: any) => {
         localStorage.setItem('information_is_complete', 'true');
         this.loadingUpdateConfig = false;
@@ -315,10 +281,8 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       case 1:
         return this.validateStepImage();
       case 2:
-        return this.validateStepRates();
-      case 3:
         return this.validateStepAddress();
-      case 4:
+      case 3:
         return this.validateStepConfig();
       default:
         return false;
@@ -326,17 +290,17 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
   }
 
   validateStepImage(): boolean {
+    if (this.generalForm.invalid) {
+      this.generalForm.markAllAsTouched();
+      return false;
+    }
     if (!this.binaryString) {
       this.showMessageInfo('Por favor elige una imagen');
       return false;
     }
-    const services = this.ratesServicesForm.get('services') as FormArray;
-    if (services.length === 0) {
-      this.showMessageInfo('Por favor seleccione al menos un servicio');
-      return false;
-    }
+    const general = this.generalForm.value;
     // Save in object to update info
-    this.stationConfig.general = {picture: this.binaryString};
+    this.merchantConfig.general = {picture: this.binaryString, ...general};
     return true;
   }
 
@@ -345,26 +309,11 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       this.addressForm.markAllAsTouched();
       return false;
     }
-    this.stationConfig.address = {...this.addressForm.value,
+    this.merchantConfig.address = {...this.addressForm.value,
        point: {lat: this.currentMarker.lat, lng: this.currentMarker.lng}};
     return true;
   }
 
-  validateStepRates(): boolean {
-    const services = this.ratesServicesForm.get('services');
-    const forms = services as FormArray;
-
-    if (services.invalid) {
-      forms.markAllAsTouched();
-      return false;
-    }
-    this.stationConfig.services = services.value;
-    this.stationConfig.services = this.stationConfig.services.map((service: any) => {
-      delete service.service_name;
-      return service;
-    });
-    return true;
-  }
 
   validateStepConfig(): boolean {
     if (this.scheduleSelected.length === 0) {
@@ -372,15 +321,7 @@ export class WizardProfileComponent implements OnInit, AfterContentInit {
       return false;
     }
 
-    this.stationConfig.config = {
-      allow_cancellations: this.allowCancellations,
-      assign_delivery_manually: this.assignDeliveryManually,
-      cancellation_policies: 'Sin politicas'
-    };
-
-    this.stationConfig.schedules = this.scheduleSelected;
-
-
+    this.merchantConfig.schedules = this.scheduleSelected;
     return true;
   }
 

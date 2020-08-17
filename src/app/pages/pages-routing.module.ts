@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule)
   },
   {
+    path: 'orders',
+    loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
+  },
+  {
     path: 'delivery',
     loadChildren: () => import('./delivery-men/delivery-men.module').then(m => m.DeliveryMenModule)
   },
@@ -20,8 +24,13 @@ const routes: Routes = [
     loadChildren: () => import('./view-profile/view-profile.module').then(m => m.ViewProfileModule)
   },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'categories', loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule) },
-  { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) }
+  { 
+    path: 'categories',
+   loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
+  },
+  { path: 'products',
+   loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
+  }
 ];
 
 @NgModule({

@@ -10,14 +10,14 @@ export class ClientsService {
   constructor(private http: HttpClient) { }
 
   getClients(params = {}) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/customers/`;
+    const merchantId = localStorage.getItem('merchant_id');
+    const url = `${environment.HOST_APIV1}/merchants/${merchantId}/customers/`;
     return this.http.get(url, { params });
   }
 
   getClientId(id: number, params = {}) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/customers/${id}/`;
+    const merchantId = localStorage.getItem('merchant_id');
+    const url = `${environment.HOST_APIV1}/merchants/${merchantId}/customers/${id}/`;
     return this.http.get(url, {params});
   }
 

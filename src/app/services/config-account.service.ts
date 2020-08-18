@@ -22,8 +22,8 @@ export class ConfigAccountService {
   }
 
   updateInfo(info) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/update_info/`;
+    const merchantId = localStorage.getItem('merchant_id');
+    const url = `${environment.HOST_APIV1}/merchants/${merchantId}/update_info/`;
     return this.http.put(url, info);
   }
 

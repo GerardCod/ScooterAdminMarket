@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid  mt-3">
 
     <div>
         <!-- Filter  -->
@@ -69,7 +69,7 @@
 
 
                         <tr *ngFor="let category of categories ">
-                            <td> 
+                            <td>
                                 <img class="img-category img-profile rounded-circle" *ngIf="category.picture" [src]="category.picture" alt="category_img">
                             </td>
                             <td> {{category.name}} </td>
@@ -96,4 +96,3 @@
 
 
 </div>
-

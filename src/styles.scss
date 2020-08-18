@@ -81,6 +81,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     src: url('./assets/fonts/Aspira.ttf');
   }
 
+.content {
+    background: white;
+    padding: 10px;
+}
+
 // Para hacer los select mas chicos
 .select-form {
   height: 35px !important;

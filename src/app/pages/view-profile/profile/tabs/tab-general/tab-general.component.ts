@@ -12,7 +12,7 @@ import { DataLayerManager } from '@agm/core';
 })
 export class TabGeneralComponent implements OnInit {
 
-  station: any;
+  merchant: any;
   binaryString;
   imageTemp;
   @ViewChild('myInput')
@@ -26,8 +26,8 @@ export class TabGeneralComponent implements OnInit {
     private fb: FormBuilder, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.station = this.profileService.station;
-    this.services = this.station.services;
+    this.merchant = this.profileService.merchant;
+    // this.services = this.merchant.services;
     this.buildGeneralForm();
   }
 
@@ -68,8 +68,10 @@ export class TabGeneralComponent implements OnInit {
 
   buildGeneralForm() {
     this.generalInfoForm = this.fb.group({
-      phone_number: [this.station.phone_number, Validators.required],
-      contact_person: [this.station.contact_person, Validators.required],
+      phone_number: [this.merchant.phone_number, Validators.required],
+      contact_person: [this.merchant.contact_person, Validators.required],
+      description: [this.merchant.description],
+      approximate_preparation_time: [this.merchant.approximate_preparation_time, Validators.required],
     })
   }
 
@@ -88,11 +90,11 @@ export class TabGeneralComponent implements OnInit {
     
     this.loadingSaveInfo = true;
     
-    this.profileService.updateStation({general: info})
+    this.profileService.updateMerchant({general: info})
     .subscribe((data: any) => {
       this.showMessageSuccess('Información actualizada correctamente');
       this.loadingSaveInfo = false;
-      localStorage.setItem('station', JSON.stringify(data.data));
+      console.log(data);
       location.reload();
       this.changeImage = false;
     }, error => {

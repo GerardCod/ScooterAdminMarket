@@ -7,6 +7,8 @@ import { MessagesComponent } from './header/messages/messages.component';
 import { UserInformationComponent } from './header/user-information/user-information.component';
 import { SearchComponent } from './header/search/search.component';
 import { RouterModule } from '@angular/router';
+import { ToggleOrdersComponent } from './header/toggle-orders/toggle-orders.component';
+import { MatSlideToggle, MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 
@@ -17,7 +19,8 @@ import { RouterModule } from '@angular/router';
     NotificationsComponent,
     MessagesComponent,
     UserInformationComponent,
-    SearchComponent
+    SearchComponent,
+    ToggleOrdersComponent
   ],
   exports: [
     HeaderComponent,
@@ -25,7 +28,8 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    MatSlideToggleModule
   ]
 })
 export class LayoutModule { }

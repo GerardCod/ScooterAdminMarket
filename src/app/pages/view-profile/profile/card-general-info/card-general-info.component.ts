@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardGeneralInfoComponent implements OnInit {
 
-  @Input() station;
+  @Input() merchant;
 
   constructor() { }
 

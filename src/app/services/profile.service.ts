@@ -8,19 +8,19 @@ import { StationModel } from '../models/station.model';
 })
 export class ProfileService {
 
-  station: StationModel;
+  merchant: any;
 
   constructor(private httpClient: HttpClient) { }
 
-  getStation() {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/`;
+  getMerchant() {
+    const merchantId = localStorage.getItem('merchant_id');
+    const url = `${environment.HOST_APIV1}/merchants/${merchantId}/`;
     return this.httpClient.get(url);
   }
 
-  updateStation(data: Object) {
-    const stationId = localStorage.getItem('station_id');
-    const url = `${environment.HOST_APIV1}/stations/${stationId}/update_info/`;
+  updateMerchant(data: Object) {
+    const merchantId = localStorage.getItem('merchant_id');
+    const url = `${environment.HOST_APIV1}/merchants/${merchantId}/update_info/`;
     return this.httpClient.patch(url, data);
   }
 

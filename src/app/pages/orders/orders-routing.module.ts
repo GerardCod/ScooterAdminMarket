@@ -22,6 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'detail/:id', component: OrderDetailComponent,
+    // path: 'detail', component: OrderDetailComponent,
   },
   { path: '', redirectTo: 'news', pathMatch: 'full' }
 

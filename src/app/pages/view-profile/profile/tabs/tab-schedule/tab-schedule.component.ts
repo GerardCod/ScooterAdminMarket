@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ScheduleModel } from 'src/app/models/schedule.model';
 import { ProfileService } from 'src/app/services/profile.service';
 import { ConfigAccountService } from 'src/app/services/config-account.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,8 +12,8 @@ export class TabScheduleComponent implements OnInit {
 
   scheduleSelected = [];
   schedules: Array<any>;
-  schedulesStation = [];
-  station: any;
+  schedulesmerchant = [];
+  merchant: any;
   loadingSchedules = false;
   loadingSaveInfo = false;
   isChangeSchedule = false;
@@ -25,8 +24,8 @@ export class TabScheduleComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSchedules();
-    this.station = this.profileService.station;
-    this.schedulesStation = this.station.schedules;
+    this.merchant = this.profileService.merchant;
+    this.schedulesmerchant = this.merchant.schedules;
   }
 
   getSchedules() {
@@ -34,7 +33,7 @@ export class TabScheduleComponent implements OnInit {
       .subscribe((data: any) => {
         const schedulesTemp: Array<any> = data.data;
 
-        this.schedulesStation.forEach(schedule => {
+        this.schedulesmerchant.forEach(schedule => {
 
           const scheduleFindIndex = schedulesTemp.findIndex(scheduleTemp => scheduleTemp.id == schedule.schedule_id);
           if (scheduleFindIndex >= 0) {
@@ -85,11 +84,11 @@ export class TabScheduleComponent implements OnInit {
   saveScheduleInfo() {
 
     this.loadingSaveInfo = true;
-    this.profileService.updateStation({schedules: this.scheduleSelected})
+    this.profileService.updateMerchant({schedules: this.scheduleSelected})
     .subscribe((data: any) => {
       this.showMessageSuccess('Horarios actualizados correctamente');
       this.loadingSaveInfo = false;
-      localStorage.setItem('station', JSON.stringify(data.data));
+      localStorage.setItem('merchant', JSON.stringify(data.data));
       this.isChangeSchedule = false;
       // location.reload();
       // this.changeImage = false;

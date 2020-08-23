@@ -24,7 +24,7 @@ export class OrderDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getOrderId();
-    this.getStation();
+    // this.getStation();
   }
 
 
@@ -38,16 +38,16 @@ export class OrderDetailComponent implements OnInit {
       });
   }
 
-  getStation() {
-    this.profileService.getStation()
-      .subscribe((data: any) => {
-        this.stationDetail = data;
-        console.log('Station', this.stationDetail);
-      }, error => {
-        console.log(error);
-        return;
-      });
-  }
+  // getStation() {
+  //   this.profileService.getStation()
+  //     .subscribe((data: any) => {
+  //       this.stationDetail = data;
+  //       console.log('Station', this.stationDetail);
+  //     }, error => {
+  //       console.log(error);
+  //       return;
+  //     });
+  // }
 
 
 

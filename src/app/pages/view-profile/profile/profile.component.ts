@@ -8,20 +8,22 @@ import { ProfileService } from '../../../services/profile.service';
 })
 export class ProfileComponent implements OnInit {
 
-  // station: Array<any> = [];
-  station;
+  // merchant: Array<any> = [];
+  merchant;
   constructor(private profileService: ProfileService) { }
 
   ngOnInit(): void {
-    this.getStation();
+    this.getmerchant();
   }
 
-  getStation() {
-    this.profileService.getStation()
+  getmerchant() {
+    this.profileService.getMerchant()
       .subscribe((data: any) => {
-        this.station = data;
-        console.log('La informacion', this.station);
-        this.profileService.station = this.station;
+        this.merchant = data;
+        console.log('La informacion', this.merchant);
+        this.profileService.merchant = this.merchant;
+        localStorage.setItem('merchant', JSON.stringify(this.merchant));
+
       }, error => {
         console.log(error);
         // return;

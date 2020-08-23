@@ -14,7 +14,7 @@ export class TabOtherComponent implements OnInit {
   assignDeliveryManually = false;
   allowCancellations = false;
   loadingUpdateConfig: boolean;
-  station;
+  merchant;
   loadingSaveInfo = false;
   isChangeConfig;
 
@@ -25,9 +25,9 @@ export class TabOtherComponent implements OnInit {
     private snackBar: MatSnackBar, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.station = this.profileService.station;
-    this.assignDeliveryManually = this.station.assign_delivery_manually;
-    this.allowCancellations = this.station.allow_cancellations;
+    this.merchant = this.profileService.merchant;
+    this.assignDeliveryManually = this.merchant.assign_delivery_manually;
+    this.allowCancellations = this.merchant.allow_cancellations;
     this.buildOtherForm();
   }
 
@@ -70,11 +70,11 @@ export class TabOtherComponent implements OnInit {
       cancellation_policies: 'Sin politicas',
       quantity_safe_order: this.otherForm.get('quantity_safe_order').value
     };
-    this.profileService.updateStation({ config })
+    this.profileService.updateMerchant({ config })
       .subscribe((data: any) => {
         this.showMessageSuccess('Configuración actualizada correctamente');
         this.loadingSaveInfo = false;
-        localStorage.setItem('station', JSON.stringify(data.data));
+        localStorage.setItem('merchant', JSON.stringify(data.data));
         this.isChangeConfig = false;
         this.otherForm.markAsPristine();
         location.reload();
@@ -87,7 +87,7 @@ export class TabOtherComponent implements OnInit {
 
   buildOtherForm() {
     this.otherForm = this.fb.group({
-      quantity_safe_order: [this.station.quantity_safe_order, Validators.required]
+      quantity_safe_order: [this.merchant.quantity_safe_order, Validators.required]
     });
   }
 
@@ -140,7 +140,7 @@ export class TabOtherComponent implements OnInit {
       return;
     }
     this.loadingUpdateConfig = true;
-    this.configService.updateInfo(this.stationConfig)
+    this.configService.updateInfo(this.merchantConfig)
       .subscribe((data: any) => {
         localStorage.setItem('information_is_complete', 'true');
         this.loadingUpdateConfig = false;

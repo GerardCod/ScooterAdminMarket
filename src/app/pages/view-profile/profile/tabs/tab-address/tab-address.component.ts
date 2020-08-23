@@ -12,7 +12,7 @@ export class TabAddressComponent implements OnInit {
 
   addressForm: FormGroup;
   loadingSaveInfo = false;
-  station: any;
+  merchant: any;
   address: any;
   isChangeAddress = false;
 
@@ -32,8 +32,8 @@ export class TabAddressComponent implements OnInit {
               private profileService: ProfileService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.station = this.profileService.station;
-    this.address = this.station.address;
+    this.merchant = this.profileService.merchant;
+    this.address = this.merchant.address;
     this.buildAddressForm(this.address);
     this.getPoint(this.address.point);
   }
@@ -78,11 +78,11 @@ export class TabAddressComponent implements OnInit {
     
     this.loadingSaveInfo = true;
     
-    this.profileService.updateStation({address: info})
+    this.profileService.updateMerchant({address: info})
     .subscribe((data: any) => {
       this.showMessageSuccess('Dirección actualizada correctamente');
       this.loadingSaveInfo = false;
-      localStorage.setItem('station', JSON.stringify(data.data));
+      localStorage.setItem('merchant', JSON.stringify(data.data));
       // location.reload();
       this.addressForm.markAsPristine();
       this.isChangeAddress = false;

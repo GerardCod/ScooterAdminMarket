@@ -1,7 +1,8 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-flex-start mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Lista de productos</h1>
-        <a class="btn btn-secondary margin-left-1rem" [routerLink]="['/products', 'add']">Agregar producto</a>
+        <h1 class="h3 mb-0 text-gray-800">Productos</h1>
+        <div class="col-md-8"></div>
+        <a class="btn btn-secondary margin-left-1rem" (click)="openDialogAddProduct()">Agregar</a>
     </div>
     <mat-tab-group>
         <mat-tab label="Disponibles">

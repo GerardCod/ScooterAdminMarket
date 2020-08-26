@@ -17,6 +17,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -38,7 +40,9 @@ const components = [
   MatNativeDateModule,
   MatTabsModule,
   MatProgressBarModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatExpansionModule
 ];
 
 @NgModule({

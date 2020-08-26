@@ -14,10 +14,21 @@ import { DeleteProductDialogComponent } from './info-product/delete-product-dial
 import { DisabledComponent } from './product-list/disabled/disabled.component';
 import { EnabledComponent } from './product-list/enabled/enabled.component';
 import { UnlockDialogComponent } from './product-list/unlock-dialog/unlock-dialog.component';
+import { MunuCategoryDialogComponent } from './add-product/munu-category-dialog/munu-category-dialog.component';
 
 
 @NgModule({
-  declarations: [ProductListComponent, AddProductComponent, InfoProductComponent, CardInfoComponent, DeleteProductDialogComponent, DisabledComponent, EnabledComponent, UnlockDialogComponent],
+  declarations: [
+    ProductListComponent,
+    AddProductComponent,
+    InfoProductComponent,
+    CardInfoComponent, 
+    DeleteProductDialogComponent, 
+    DisabledComponent, 
+    EnabledComponent, 
+    UnlockDialogComponent,
+    MunuCategoryDialogComponent, 
+  ],
   imports: [
     CommonModule,
     ProductsRoutingModule,
@@ -27,6 +38,10 @@ import { UnlockDialogComponent } from './product-list/unlock-dialog/unlock-dialo
     ReactiveFormsModule,
     PipesModule
   ],
-  entryComponents: [DeleteProductDialogComponent, UnlockDialogComponent]
+  entryComponents: [
+    DeleteProductDialogComponent,
+    UnlockDialogComponent,
+    MunuCategoryDialogComponent
+  ]
 })
 export class ProductsModule { }

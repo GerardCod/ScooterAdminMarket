@@ -10,6 +10,7 @@ export class Product {
         public category_id: number,
         public category: Category,
         public picture?: string,
-        public id?: number 
+        public id?: number,
+        public menu_categories?: Array<any>
     ) {}
 }

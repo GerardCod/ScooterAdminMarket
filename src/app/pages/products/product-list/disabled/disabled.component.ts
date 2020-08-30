@@ -17,23 +17,19 @@ export class DisabledComponent implements OnInit {
   products: Product[];
   productsSubscription: Subscription;
 
-   // MatPaginator Inputs
-   length = 100;
-   pageSize = 25;
-   pageSizeOptions: number[] = [25, 50, 75, 100];
-   // MatPaginator Output
-   pageEvent: PageEvent;
+  // MatPaginator Inputs
+  length = 100;
+  pageSize = 25;
+  pageSizeOptions: number[] = [25, 50, 75, 100];
+  // MatPaginator Output
+  pageEvent: PageEvent;
 
-   params = {
-    limit: 15,
-    offset: 0,
-    search: '',
-    ordering: '',
-    status: 2
-  }
+  params = {
+    limit: 15, offset: 0, search: '', ordering: '', status: 2
+  };
 
   constructor(
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
     private productService: ProductsService,
   ) { }
 
@@ -60,9 +56,9 @@ export class DisabledComponent implements OnInit {
       this.productsSubscription.unsubscribe();
     }
     this.productsSubscription = this.productService.getProducts(params)
-    .subscribe((data: any) => {
-      this.products = data.results;
-    });
+      .subscribe((data: any) => {
+        this.products = data.results;
+      });
   }
 
   getPage(e: any): PageEvent {

@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Confirmación de habilitación</h1>
+<h1 mat-dialog-title>Deshabilitar</h1>
 <section mat-dialog-content>
-    <p>¿En verdad desea habilitar nuevamente la categoría {{category.name}}?</p>
+    <p>¿Desea deshabilitar la categoría?</p>
 </section>
-<section mat-dialog-actions>
-    <button class="btn btn-primary" (click)="unlockCategory()">Claro</button>
-    <button class="btn btn-outline-primary" mat-dialog-close color="primary">No</button>
+<section mat-dialog-actions class="align-content-end">
+    <button class="btn btn-light" mat-dialog-close color="primary">Cancelar</button>
+    <button class="btn btn-primary">Deshabilitar</button>
 </section>

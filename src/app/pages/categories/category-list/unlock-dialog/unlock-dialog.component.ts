@@ -31,10 +31,10 @@ export class UnlockDialogComponent implements OnInit, OnDestroy {
   }
 
   unlockCategory(): void {
-    this.enableSubscription = this.categoryService.unlockCategory(this.category)
-    .subscribe((data: any) => {
-      console.log(data);
-      this.dialogRef.close();
-    });
+    // this.enableSubscription = this.categoryService.unlockCategory(this.categori.id)
+      // .subscribe((data: any) => {
+      //   console.log(data);
+      //   this.dialogRef.close();
+      // });
   }
 }

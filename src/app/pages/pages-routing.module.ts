@@ -8,10 +8,6 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
-    path: 'clients',
-    loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule)
-  },
-  {
     path: 'orders',
     loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
   },
@@ -24,12 +20,13 @@ const routes: Routes = [
     loadChildren: () => import('./view-profile/view-profile.module').then(m => m.ViewProfileModule)
   },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { 
+  {
     path: 'categories',
-   loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
+    loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
   },
-  { path: 'products',
-   loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
+  {
+    path: 'products',
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
   }
 ];
 

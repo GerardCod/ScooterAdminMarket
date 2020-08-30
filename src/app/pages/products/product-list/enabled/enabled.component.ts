@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import { ProductsService } from 'src/app/services/products.service';
 import { CategoriesService } from 'src/app/services/categories.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-enabled',
@@ -14,21 +15,21 @@ import { CategoriesService } from 'src/app/services/categories.service';
 export class EnabledComponent implements OnInit, OnDestroy {
   products: Product[];
   productsSubscription: Subscription;
- 
-   // MatPaginator Inputs
-   length = 100;
-   pageSize = 25;
-   pageSizeOptions: number[] = [25, 50, 75, 100];
-   // MatPaginator Output
-   pageEvent: PageEvent;
 
-   params = {
+  // MatPaginator Inputs
+  length = 100;
+  pageSize = 25;
+  pageSizeOptions: number[] = [25, 50, 75, 100];
+  // MatPaginator Output
+  pageEvent: PageEvent;
+
+  params = {
     limit: 15,
     offset: 0,
     search: '',
     ordering: '',
     status: 1
-  }
+  };
 
   constructor(private productService: ProductsService) { }
 
@@ -38,6 +39,32 @@ export class EnabledComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.productsSubscription.unsubscribe();
+  }
+
+  lockProduct(id, name) {
+    Swal.fire({
+      title: 'Bloquear',
+      text: `Esta seguro de bloquear a ${name}`,
+      type: 'warning',
+      showConfirmButton: true,
+      confirmButtonText: 'Bloquear',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then(resp => {
+      if (resp.value) {
+        this.productsSubscription = this.productService.unlockProduct(id)
+          .subscribe(data => {
+            Swal.fire({
+              title: 'Bloqueado',
+              type: 'success',
+              text: 'El vehiculo se bloqueado correctamente',
+              timer: 2000
+            });
+            this.getProducts(this.params);
+          });
+      }
+    });
+
   }
 
   searchBy(search: string): void {
@@ -55,9 +82,9 @@ export class EnabledComponent implements OnInit, OnDestroy {
       this.productsSubscription.unsubscribe();
     }
     this.productsSubscription = this.productService.getProducts(params)
-    .subscribe((data: any) => {
-      this.products = data.results;
-    });
+      .subscribe((data: any) => {
+        this.products = data.results;
+      });
   }
 
   getPage(e: any): PageEvent {

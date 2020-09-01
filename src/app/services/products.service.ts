@@ -37,6 +37,6 @@ export class ProductsService {
   }
 
   unlockProduct({id}: Product): Observable<any> {
-    return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/products/${id}/unlock/`, {});
+    return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/products/${id}/`, {});
   }
 }

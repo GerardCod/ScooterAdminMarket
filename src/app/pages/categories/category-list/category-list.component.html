@@ -7,17 +7,12 @@
         <div class="col-md-2">
             <a class="btn btn-secondary btn-block btn-sm margin-left" (click)="openDialogAddcategory()">Agregar</a>
         </div>
-
     </div>
 
     <mat-tab-group>
         <mat-tab label="Disponibles">
             <app-enabled (openEditDialog)="openDialogAddcategory($event)">
-
-
-
             </app-enabled>
-
         </mat-tab>
         <mat-tab label="No disponibles">
             <app-disabled></app-disabled>

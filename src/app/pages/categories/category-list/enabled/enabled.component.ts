@@ -6,6 +6,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UnlockDialogComponent } from '../unlock-dialog/unlock-dialog.component';
 import Swal from 'sweetalert2';
+import { CategoriesModule } from '../../categories.module';
 
 @Component({
   selector: 'app-enabled',
@@ -23,7 +24,7 @@ export class EnabledComponent implements OnInit, OnDestroy {
     search: '',
     ordering: '',
     status: 1
-  }
+  };
 
   // MatPaginator Inputs
   length = 100;
@@ -40,20 +41,16 @@ export class EnabledComponent implements OnInit, OnDestroy {
 
   editCategory(category) {
     this.openEditDialog.emit(category);
-
   }
 
-  blockCategory() {
-    const dialogRef = this.dialog.open(UnlockDialogComponent, {
-      disableClose: true,
-      width: '500px',
-    });
-    dialogRef.afterClosed().subscribe(data => {
-      if (data) {
-        this.getCategories(this.params);
-      }
-    });
+
+  blockCategory(id) {
+    this.categoriesService.unlockCategory(id)
+      .subscribe((data: any) => {
+        console.log('Se elimino');
+      });
   }
+
 
   ngOnDestroy(): void {
     this.categoriesSubscription.unsubscribe();
@@ -87,7 +84,6 @@ export class EnabledComponent implements OnInit, OnDestroy {
       this.pageSize = 15;
       return;
     }
-
     this.params.limit = e.pageSize;
     this.params.offset = this.params.limit * e.pageIndex;
     this.getCategories(this.params);

@@ -28,8 +28,12 @@
                 </div>
                 <hr>
                 <div>
-                    <button [disabled]="group.invalid" class="btn btn-primary align-items-end">
+                    <button [disabled]="loadingSave" [disabled]="group.invalid" class="btn btn-primary align-items-end">
                         <span>Guardar</span>
+                        
+                        <div *ngIf="loadingSave" class="spinner-border text-warning" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div>
                     </button>
                 </div>
             </form>

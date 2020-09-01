@@ -52,8 +52,8 @@ export class EnabledComponent implements OnInit, OnDestroy {
       cancelButtonText: 'Cancelar',
     }).then(resp => {
       if (resp.value) {
-        this.productsSubscription = this.productService.unlockProduct(id)
-          .subscribe(data => {
+        this.productService.unlockProduct(id)
+                    .subscribe(data => {
             Swal.fire({
               title: 'Bloqueado',
               type: 'success',

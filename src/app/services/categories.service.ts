@@ -20,22 +20,25 @@ export class CategoriesService {
   }
 
   addCategory(category: Category): Observable<any> {
-    return this.http.post(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/`, {...category});
+    return this.http.post(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/`, { ...category });
   }
 
   getCategoryById(categoryId: number): Observable<any> {
     return this.http.get(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${categoryId}/`);
   }
 
-  deleteCategory({id}: Category): Observable<any> {
+  deleteCategory({ id }: Category): Observable<any> {
     return this.http.delete(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${id}/`);
   }
 
   updateCategory(category: Category): Observable<any> {
-    return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${category.id}/`, {...category});
+    return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${category.id}/`, { ...category });
   }
 
-  unlockCategory({id}: Category): Observable<any> {
+  unlockCategory({ id }: Category): Observable<any> {
+    return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${id}/unlock/`, {});
+  }
+  unlockCategory2(id: number): Observable<any> {
     return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${id}/unlock/`, {});
   }
 }

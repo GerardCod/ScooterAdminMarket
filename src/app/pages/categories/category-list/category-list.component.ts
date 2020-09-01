@@ -13,17 +13,13 @@ import { AddCategoryComponent } from '../add-category/add-category.component';
 })
 export class CategoryListComponent implements OnInit {
 
-  // category: Array<any> = [];
-
   constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
-  
 
-
-  openDialogAddcategory(category) {
+  openDialogAddcategory(category = null) {
     const dialogRef = this.dialog.open(AddCategoryComponent, {
       disableClose: true,
       width: '500px',

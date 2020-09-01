@@ -1,19 +1,11 @@
 <div id="invoice" *ngIf="orderDetail">
-
-    <div class="toolbar hidden-print">
-        <div class="text-right">
-            <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i>Imprimir</button>
-            <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i>Exportar a PDF</button>
-        </div>
-        <hr>
-    </div>
     <div class="invoice overflow-auto">
         <div style="min-width: 600px">
             <header>
                 <div class="row">
                     <div class="col">
-                        <!-- <img [src]="stationDetail.picture" width="100%" /> -->
-                        <h1> {{ stationDetail.station_name }} </h1>
+                        <!-- <img [src]="stationDetail.picture" width="10%" /> -->
+                        <h1> {{ orderDetail.station_object.station_name }} </h1>
                     </div>
                     <div class="col company-details">
                         <div> {{stationDetail.address.street}} </div>
@@ -27,7 +19,7 @@
                     <div class="col invoice-to">
                         <!-- <div class="text-gray-light">Ticket:</div> -->
                         <h2 class="to"> {{ orderDetail.customer.name }} </h2>
-                        <div class="address"> {{ orderDetail.from_address.full_address }} </div>
+                        <!-- <div class="address"> {{ orderDetail.from_address.full_address }} </div> -->
                         <div class="email"> {{orderDetail.customer.phone_number}} </div>
                         <div class="email"> {{orderDetail.ema}} </div>
                     </div>

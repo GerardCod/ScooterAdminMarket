@@ -20,8 +20,11 @@ export class OrderDetailComponent implements OnInit {
   stationDetail;
 
 
-  constructor(private ordersService: OrdersService, private profileService: ProfileService,
-              private activatedRoute: ActivatedRoute, private route: Router) {
+  constructor(
+    private ordersService: OrdersService,
+    private profileService: ProfileService,
+    private activatedRoute: ActivatedRoute,
+    private route: Router) {
     this.idOrder = activatedRoute.snapshot.params.id;
     console.log('El id obtenido es', this.idOrder);
 
@@ -29,7 +32,7 @@ export class OrderDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getOrderId();
-    this.getStation();
+    this.getProfileId();
   }
 
 
@@ -43,14 +46,13 @@ export class OrderDetailComponent implements OnInit {
       });
   }
 
-  getStation() {
+  getProfileId() {
     this.profileService.getStation()
       .subscribe((data: any) => {
         this.stationDetail = data;
-        console.log('Station', this.stationDetail);
+        console.log('Order', this.stationDetail);
       }, error => {
-        console.log(error);
-        return;
+        console.log(error, 'No paso nada ');
       });
   }
 }

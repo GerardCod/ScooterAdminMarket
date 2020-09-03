@@ -41,10 +41,10 @@ export class EnabledComponent implements OnInit, OnDestroy {
     this.productsSubscription.unsubscribe();
   }
 
-  lockProduct(id, name) {
+  deleteCategory(id, name) {
     Swal.fire({
       title: 'Bloquear',
-      text: `Esta seguro de bloquear a ${name}`,
+      text: `Esta seguro de bloquear a: ${name}`,
       type: 'warning',
       showConfirmButton: true,
       confirmButtonText: 'Bloquear',
@@ -52,19 +52,24 @@ export class EnabledComponent implements OnInit, OnDestroy {
       cancelButtonText: 'Cancelar',
     }).then(resp => {
       if (resp.value) {
-        this.productService.unlockProduct(id)
-                    .subscribe(data => {
+        this.productService.deleteProduct(id)
+          .subscribe(data => {
             Swal.fire({
               title: 'Bloqueado',
               type: 'success',
-              text: 'El vehiculo se bloqueado correctamente',
-              timer: 2000
+              text: 'El repartidor ha sido bloqueado',
+              timer: 1500
             });
             this.getProducts(this.params);
           });
       }
     });
 
+
+  }
+
+  editCategory(id, name) {
+    
   }
 
   searchBy(search: string): void {
@@ -84,6 +89,7 @@ export class EnabledComponent implements OnInit, OnDestroy {
     this.productsSubscription = this.productService.getProducts(params)
       .subscribe((data: any) => {
         this.products = data.results;
+        console.log(this.products);
       });
   }
 
@@ -92,7 +98,6 @@ export class EnabledComponent implements OnInit, OnDestroy {
       this.pageSize = 25;
       return;
     }
-
     this.params.limit = e.pageSize;
     this.params.offset = this.params.limit * e.pageIndex;
     this.getProducts(this.params);

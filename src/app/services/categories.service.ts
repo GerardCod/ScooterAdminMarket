@@ -27,7 +27,7 @@ export class CategoriesService {
     return this.http.get(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${categoryId}/`);
   }
 
-  deleteCategory({ id }: Category): Observable<any> {
+  deleteCategory(id: Category): Observable<any> {
     return this.http.delete(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${id}/`);
   }
 
@@ -35,10 +35,9 @@ export class CategoriesService {
     return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${category.id}/`, { ...category });
   }
 
-  unlockCategory({ id }: Category): Observable<any> {
-    return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${id}/unlock/`, {});
+  unlockCategory(id: Category): Observable<any> {
+    return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${id}/unlock/`, {status: 1});
   }
-  unlockCategory2(id: number): Observable<any> {
-    return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/categories/${id}/unlock/`, {});
-  }
+
+
 }

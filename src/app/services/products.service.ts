@@ -32,7 +32,7 @@ export class ProductsService {
     return this.http.patch(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/products/${product.id}/`, {...product});
   }
 
-  deleteProduct({id}: Product): Observable<any> {
+  deleteProduct(id: Product): Observable<any> {
     return this.http.delete(`${environment.HOST_APIV1}/merchants/${this.merchant.id}/products/${id}/`);
   }
 

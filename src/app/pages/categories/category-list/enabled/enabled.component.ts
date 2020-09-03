@@ -4,9 +4,7 @@ import { Category } from 'src/app/models/category.model';
 import { PageEvent } from '@angular/material/paginator';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { MatDialog } from '@angular/material/dialog';
-import { UnlockDialogComponent } from '../unlock-dialog/unlock-dialog.component';
 import Swal from 'sweetalert2';
-import { CategoriesModule } from '../../categories.module';
 
 @Component({
   selector: 'app-enabled',
@@ -46,10 +44,40 @@ export class EnabledComponent implements OnInit, OnDestroy {
 
   blockCategory(id) {
     this.categoriesService.unlockCategory(id)
-      .subscribe((data: any) => {
-        console.log('Se elimino');
+      .subscribe((data) => {
+        console.log(data);
+      }, error => {
+        console.log(error);
       });
   }
+
+  deleteCategory(id, nombre) {
+    Swal.fire({
+      title: 'Bloquear',
+      text: `Esta seguro de bloquear a ${nombre}`,
+      type: 'warning',
+      showConfirmButton: true,
+      confirmButtonText: 'Bloquear',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then(resp => {
+      if (resp.value) {
+        // this.categories.splice(1);
+        this.categoriesService.deleteCategory(id)
+          .subscribe(data => {
+            Swal.fire({
+              title: 'Bloqueado',
+              type: 'success',
+              text: 'El repartidor ha sido bloqueado',
+              timer: 2000
+            });
+            this.getCategories(this.params);
+          });
+
+      }
+    });
+  }
+
 
 
   ngOnDestroy(): void {

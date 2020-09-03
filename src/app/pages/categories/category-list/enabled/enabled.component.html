@@ -75,21 +75,10 @@
                                 <button class="btn btn-edit" (click)="editCategory(category)">
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
-                                <button class="btn btn-lock" (click)="blockCategory(category.id)">
+                                <button class="btn btn-lock" (click)="deleteCategory(category.id, category.name)">
                                     <i class="fas fa-lock fa-primary"></i>
                                 </button>
                             </td>
-                            <!-- <td class="text-center">
-                                <button class="btn btn-edit" [routerLink]="['/categories', 'category', category.id]">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-
-
-                                <button class="btn btn-block">
-                                    <i class="fas fa-lock"></i>
-                                </button>
-
-                            </td> -->
 
                         </tr>
                     </tbody>

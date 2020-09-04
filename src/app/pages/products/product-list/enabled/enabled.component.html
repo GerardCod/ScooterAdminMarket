@@ -74,7 +74,7 @@
                             <td> {{product.stock}}</td>
                             <td> $ {{product.price }}</td>
                             <td class="text-center">
-                                <button class="btn btn-Editt" (click)="editCategory(product.id, product.name)">
+                                <button class="btn btn-Editt" routerLink="/products/modify/{{product.id}}">
                                     <i class="fas fa-pencil-alt"></i> 
                                 </button>
                                 <button class="btn btn-Delete" (click)="deleteCategory(product.id, product.name)">

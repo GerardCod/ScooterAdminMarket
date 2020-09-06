@@ -64,13 +64,21 @@ export class EnabledComponent implements OnInit, OnDestroy {
           });
       }
     });
-
-
   }
 
-  editCategory(id, name) {
-    
+  disponibilidadProduct(product: Product) {
+    if (product.is_available === true) {
+      this.productService.updateProduct(product)
+        .subscribe((data: any) => {
+        });
+    } else {
+
+      this.productService.updateProduct(product)
+        .subscribe((data: any) => {
+        });
+    }
   }
+
 
   searchBy(search: string): void {
     this.params.search = search;

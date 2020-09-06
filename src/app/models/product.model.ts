@@ -6,6 +6,7 @@ export class Product {
         public description: string,
         public description_long: string,
         public stock: number,
+        public is_available: boolean,
         public price: number,
         public category_id: number,
         public category: Category,

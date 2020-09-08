@@ -44,6 +44,7 @@ export class AuthService {
     localStorage.removeItem('merchant');
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
+    localStorage.removeItem('merchant_id');
     this.router.navigate(['/auth/']);
   }
 

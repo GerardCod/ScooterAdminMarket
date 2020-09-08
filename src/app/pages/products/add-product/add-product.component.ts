@@ -70,7 +70,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.group = this.builder.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      stock: ['', [Validators.required]],
+      stock: [100],
       price: ['', [Validators.required]],
       category_id: ['', [Validators.required]]
     });

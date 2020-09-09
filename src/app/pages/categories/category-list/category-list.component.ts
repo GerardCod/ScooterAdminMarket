@@ -27,7 +27,9 @@ export class CategoryListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
+        this.dialog.closeAll();
       }
     });
+
   }
 }

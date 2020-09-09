@@ -21,7 +21,9 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   categorySubscription: Subscription;
   loadingSave = false;
 
-  constructor(private categoriesService: CategoriesService, private route: ActivatedRoute, private router: Router,
+  constructor(
+    private categoriesService: CategoriesService,
+    private route: ActivatedRoute, private router: Router,
     public dialogRef: MatDialogRef<AddCategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 

@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
   setDataUserLocalStorage(data) {
     localStorage.setItem('access_token', data.access);
     localStorage.setItem('merchant_id', data.merchant.id);
+    localStorage.setItem('type_menu', data.merchant.type_menu);
     localStorage.setItem('refresh_token', data.refresh);
     localStorage.setItem('information_is_complete', data.merchant.information_is_complete);
     localStorage.setItem('merchant', JSON.stringify(data.merchant));

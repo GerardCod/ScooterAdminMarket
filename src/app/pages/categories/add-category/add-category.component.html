@@ -20,7 +20,7 @@
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row" *ngIf="typeMenu >= 2">
                     <div class="form-group col-md-6">
                         <label>Imagen</label>
                         <input type="file" class="form-control" placeholder="Elige una imagen" (change)="handlePickUpImage($event)">

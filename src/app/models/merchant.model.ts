@@ -10,6 +10,7 @@ export class Merchant {
         public picture: string,
         public reputation: number,
         public subcategory: string,
+        public type_menu: number,
         public user: User
     ) {}
 }

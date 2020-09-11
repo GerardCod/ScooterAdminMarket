@@ -20,6 +20,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   storeDataSubscription: Subscription;
   categorySubscription: Subscription;
   loadingSave = false;
+  typeMenu;
 
   constructor(private categoriesService: CategoriesService, private route: ActivatedRoute, private router: Router,
     public dialogRef: MatDialogRef<AddCategoryComponent>,
@@ -37,6 +38,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.typeMenu = localStorage.getItem('type_menu');
     if (this.id) {
       this.categorySubscription = this.categoriesService
         .getCategoryById(Number(this.id))

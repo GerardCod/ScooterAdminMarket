@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class EnabledComponent implements OnInit, OnDestroy {
   categoriesSubscription: Subscription;
   categories: Category[];
+  typeMenu;
   @Output() openEditDialog = new EventEmitter<Category>();
 
   params = {
@@ -34,6 +35,7 @@ export class EnabledComponent implements OnInit, OnDestroy {
   constructor(private categoriesService: CategoriesService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.typeMenu = localStorage.getItem('type_menu');
     this.getCategories(this.params);
   }
 

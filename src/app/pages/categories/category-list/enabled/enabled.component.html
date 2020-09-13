@@ -61,6 +61,7 @@
                         <tr>
                             <th *ngIf="typeMenu >= 2" scope="col">Imagen</th>
                             <th scope="col">Nombre </th>
+                            <th *ngIf="typeMenu >= 2" scope="col">Subcategorias</th>
                             <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -71,6 +72,9 @@
                                 <img class="img-category img-profile rounded-circle" *ngIf="category.picture === null" src="assets/img/Bolsa.png" alt="category_img">
                             </td>
                             <td> {{category.name}} </td>
+                            <td *ngIf="typeMenu >= 2">
+                                <p *ngFor="let subcategory of category.subcategories">-{{subcategory.name}}</p>
+                            </td>
                             <td class="text-center btn-edit">
                                 <button class="btn btn-edit" (click)="editCategory(category)">
                                     <i class="fas fa-pencil-alt"></i>

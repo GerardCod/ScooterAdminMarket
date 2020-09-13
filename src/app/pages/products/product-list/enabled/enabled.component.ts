@@ -43,8 +43,8 @@ export class EnabledComponent implements OnInit, OnDestroy {
 
   deleteCategory(id, name) {
     Swal.fire({
-      title: 'Bloquear',
-      text: `Esta seguro de bloquear a: ${name}`,
+      title: 'Desactivar',
+      text: `Esta seguro de desactivar a: ${name}`,
       type: 'warning',
       showConfirmButton: true,
       confirmButtonText: 'Bloquear',
@@ -54,13 +54,13 @@ export class EnabledComponent implements OnInit, OnDestroy {
       if (resp.value) {
         this.productService.deleteProduct(id)
           .subscribe(data => {
+            this.getProducts(this.params);
             Swal.fire({
               title: 'Bloqueado',
               type: 'success',
-              text: 'El repartidor ha sido bloqueado',
+              text: 'El producto ha sido desactivado',
               timer: 1500
             });
-            this.getProducts(this.params);
           });
       }
     });

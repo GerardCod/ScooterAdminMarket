@@ -5,14 +5,14 @@
 
     <div class="row justify-content-center">
         <div class="col-xl-12 col-lg-12 col-md-12">
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
+            <div class="card o-hidden border-0 shadow-lg my-3">
+                <div class="card-body px-4">
                     <div class="row justify-content-center">
-                        <div class="col-lg-11 p-5">
+                        <div class="col-lg-7 p-5">
                             <form [formGroup]="group" class="user" (ngSubmit)="sendData(group.value)">
                                 <div class="form-group">
                                     <div class="form-row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <label>Nombre del producto</label>
                                             <input formControlName="name" [ngClass]="{'is-invalid': isFieldInvalid('name'), 'is-valid': isFieldValid('name')}" type="text" class="form-control" placeholder="Nombre del producto">
                                             <!-- MESSAGES ERRORS  -->
@@ -21,7 +21,7 @@
                                                 requerido.</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-12 mt-2">
                                             <label for="">Descripción</label>
                                             <textarea formControlName="description" [ngClass]="{'is-invalid': isFieldInvalid('description'), 'is-valid': isFieldValid('description')}" type="text" class="form-control" placeholder="Descripcion" name="" id=""></textarea>
                                             <!-- <input formControlName="description" [ngClass]="{'is-invalid': isFieldInvalid('description'), 'is-valid': isFieldValid('description')}" type="text" class="form-control" placeholder="Ingresa una descripción corta del producto"> -->
@@ -36,9 +36,9 @@
                                 <div class="form-group">
                                     <div class="form-row">
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <label for="">Precio</label>
-                                            <input formControlName="price" [ngClass]="{'is-invalid': isFieldInvalid('price'), 'is-valid': isFieldValid('price')}" type="text" class="form-control" placeholder="Precio">
+                                            <input formControlName="price" [ngClass]="{'is-invalid': isFieldInvalid('price'), 'is-valid': isFieldValid('price')}" type="number" class="form-control" placeholder="Precio">
                                             <!-- MESSAGES ERRORS  -->
                                             <div class="invalid-feedback">
                                                 <span *ngIf="hasFieldError('price','required')">El precio del producto
@@ -47,7 +47,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <label for="">Categoría</label>
 
                                             <select [ngClass]="{'is-invalid': isFieldInvalid('category_id'), 'is-valid': isFieldValid('category_id')}" class="form-control select-form" formControlName="category_id">
@@ -65,62 +65,91 @@
                                             </div>
 
                                         </div>
-                                    </div>
-                                </div>
+                                        <div class="col-md-6">
+                                            <label for="">Subcategoría</label>
 
-                                <div class="form-group">
+                                            <select [ngClass]="{'is-invalid': isFieldInvalid('category_id'), 'is-valid': isFieldValid('category_id')}" class="form-control select-form" formControlName="category_id">
+                                                <option value="">Selecciona una subcategoría</option>
+                                                <ng-container *ngIf="categories">
+                                                    <option *ngFor="let category of categories" [value]="category.id">
+                                                        {{category.name}}</option>
+                                                </ng-container>
+                                            </select>
+                                            <!-- MESSAGES ERRORS  -->
+                                            <div class="invalid-feedback">
+                                                <span *ngIf="hasFieldError('category_id','required')">La subcategoría del
+                                                    producto
+                                                    es requerida</span>
+                                            </div>
 
-                                    <div class="form-row">
-                                        <div class="col-md-3">
-                                            <label for="">Menú avanzado(opcional)</label>
-                                            <button (click)="openMenuDialog()" type="button" class="btn btn-outline-primary">Agregar grupo modificador</button>
-                                            <!-- MENÚ GUARDADO  -->
-                                            <mat-accordion class="my-2">
-                                                <mat-expansion-panel *ngFor="let menu of menus">
-                                                    <mat-expansion-panel-header>
-                                                        <mat-panel-title>
-                                                            {{menu.name}}
-                                                        </mat-panel-title>
-                                                    </mat-expansion-panel-header>
-                                                    <!--  ARTICULOS -->
-                                                    <div class="row">
-                                                        <div class="col-lg-8">
-                                                            <label style="font-weight: bold;" for="">Articulos</label>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <label style="font-weight: bold;" for="">Precio</label>
-                                                        </div>
-                                                    </div>
-                                                    <div *ngFor="let option of menu.options; let i = index;">
-                                                        <div class="row">
-                                                            <div class="col-lg-8 d-flex my-1 flex-column">
-                                                                <span>{{option.name}}</span>
-                                                            </div>
-                                                            <div class="col-lg-4 d-flex my-1 flex-column">
-                                                                <span>{{option.price}}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- TERMINA ARTICULOS  -->
-                                                </mat-expansion-panel>
-                                            </mat-accordion>
-                                            <!-- MENÚ GUARDADO  -->
                                         </div>
+                                        <div class="col-md-6">
+                                            <label for="">Sección</label>
 
-                                        <div class="col-md-4">
-                                            <label> Imagen</label>
+                                            <select [ngClass]="{'is-invalid': isFieldInvalid('category_id'), 'is-valid': isFieldValid('category_id')}" class="form-control select-form" formControlName="category_id">
+                                                <option value="">Selecciona una sección</option>
+                                                <ng-container *ngIf="categories">
+                                                    <option *ngFor="let category of categories" [value]="category.id">
+                                                        {{category.name}}</option>
+                                                </ng-container>
+                                            </select>
+                                            <!-- MESSAGES ERRORS  -->
+                                            <div class="invalid-feedback">
+                                                <span *ngIf="hasFieldError('category_id','required')">La sección del
+                                                    producto
+                                                    es requerida</span>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-12 mt-2">
                                             <div class="form-group">
-                                                <input type="file" class="form-control form-control-file" placeholder="Elige una imagen" (change)="handlePickUpImage($event)">
+
+                                                <div class="form-row">
+                                                    <div class="col-md-12 d-flex flex-column">
+                                                        <label style="font-weight: bold;" for="">Menú avanzado(opcional)</label>
+                                                        <button (click)="openMenuDialog()" type="button" class="btn btn-outline-primary">Agregar grupo modificador</button>
+                                                        <!-- MENÚ GUARDADO  -->
+                                                        <mat-accordion class="my-2">
+                                                            <mat-expansion-panel *ngFor="let menu of menus">
+                                                                <mat-expansion-panel-header>
+                                                                    <mat-panel-title>
+                                                                        {{menu.name}}
+                                                                    </mat-panel-title>
+                                                                </mat-expansion-panel-header>
+                                                                <!--  ARTICULOS -->
+                                                                <div class="row">
+                                                                    <div class="col-lg-8">
+                                                                        <label style="font-weight: bold;" for="">Articulos</label>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <label style="font-weight: bold;" for="">Precio</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div *ngFor="let option of menu.options; let i = index;">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-8 d-flex my-1 flex-column">
+                                                                            <span>{{option.name}}</span>
+                                                                        </div>
+                                                                        <div class="col-lg-4 d-flex my-1 flex-column">
+                                                                            <span>{{option.price}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- TERMINA ARTICULOS  -->
+                                                            </mat-expansion-panel>
+                                                        </mat-accordion>
+                                                        <!-- MENÚ GUARDADO  -->
+                                                    </div>
+            
+                                                 
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="images d-flex justify-content-center">
-                                                <img *ngIf="imageURL" class="img-fluid image-product" [src]="imageURL" alt="category_picture">
-                                                <img *ngIf="!imageURL" class="img-fluid image-product" src="assets/images/common/no-image.png" alt="">
-                                            </div>
-                                        </div>
+                 
                                     </div>
                                 </div>
+
+                             
 
                                 <hr>
                                 <button [disabled]="loadingSave" class="btn btn-primary">
@@ -131,6 +160,20 @@
                                 </button>
                             </form>
                         </div>
+                        <div class="col-lg-5 p-5">
+                            <div class="col-md-12">
+                                <div class="images d-flex justify-content-center">
+                                    <img *ngIf="imageURL" class="img-fluid image-product" [src]="imageURL" alt="category_picture">
+                                    <img *ngIf="!imageURL" class="img-fluid image-product" src="assets/images/common/no-image.png" alt="">
+                                </div>
+                            </div>
+                                <div class="col-md-12">
+                                    <label> Imagen</label>
+                                    <div class="form-group">
+                                        <input type="file" class="form-control form-control-file" placeholder="Elige una imagen" (change)="handlePickUpImage($event)">
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>

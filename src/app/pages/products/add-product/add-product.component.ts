@@ -117,7 +117,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(MunuCategoryDialogComponent, {
       disableClose: true,
       width: '40%',
-      minWidth: '300px',
+      minWidth: '400px',
       panelClass: 'custom-dialog-container'
     });
 

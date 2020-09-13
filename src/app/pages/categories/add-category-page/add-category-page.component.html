@@ -1,0 +1,94 @@
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-flex-start mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Agregar categoria</h1>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="card o-hidden border-0 shadow-lg my-2">
+                <form [formGroup]="group">
+                    <div class="card-body p-5">
+                        <div class="row justify-content-start">
+                            <!-- NOMBRE DE LA CATEGORÍA  -->
+                            <div class="col-lg-12 my-3 p-0">
+
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <label for="">Nombre de la categoría</label>
+                                            <input formControlName="name"
+                                                [ngClass]="{'is-invalid': isFieldInvalid('name'), 'is-valid': isFieldValid('name')}"
+                                                type="text" class="form-control" placeholder="Nombre de la categoría">
+                                            <!-- MESSAGES ERRORS  -->
+                                            <div class="invalid-feedback">
+                                                <span *ngIf="hasFieldError('name','required')">Nombre de la categoría es
+                                                    necesaria.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- TERMINA EL NOMBRE DE LA CATEGORÍA  -->
+
+                            <div class="col-lg-4 d-flex align-items-center flex-column border col-list p-2">
+                                <span>Subcategorias</span>
+                                <span style="font-size: 90%;" class="my-5" *ngIf="subcatoryList.length == 0">Agrega una
+                                    subcategoría</span>
+                                <mat-selection-list (selectionChange)="selectSubcategory($event)" class="w-100"
+                                    #subcategories [multiple]="false">
+                                    <mat-list-option class="d-flex"
+                                        *ngFor="let subcategory of subcatoryList; let i = index" [value]="i">
+                                        <span>
+                                            {{subcategory.name}}
+                                            <i class="fas fa-trash ml-5"></i>
+                                            <i class="far fa-edit mx-3"></i>
+                                        </span>
+
+                                    </mat-list-option>
+                                </mat-selection-list>
+                                <button (click)="openDialogSubcategory()"
+                                    class="btn btn btn-outline-primary btn-sm mt-3 w-50 fix">Añadir <i
+                                        class="fas fa-plus"></i></button>
+                            </div>
+                            <div class="col-lg-4 d-flex align-items-center flex-column border col-list p-2"
+                                *ngIf="subcategories.selectedOptions.selected[0]">
+                                <span>Secciones para {{subcatoryList[subcategorySelectedId].name}}</span>
+                                <span style="font-size: 90%;" class="my-5"
+                                    *ngIf="subcatoryList[subcategorySelectedId].sections.length == 0">Agrega una
+                                    sección</span>
+
+                                <mat-selection-list class="w-100" #sections [multiple]="false">
+                                    <mat-list-option
+                                        *ngFor="let section of subcatoryList[subcategorySelectedId].sections; let i = index"
+                                        [value]="i">
+                                        <span>
+                                            {{section.name}}
+                                            <i class="fas fa-trash ml-5"></i>
+                                            <i class="far fa-edit mx-3"></i>
+                                        </span>
+                                    </mat-list-option>
+                                </mat-selection-list>
+                                <button (click)="openDialogSection()"
+                                    class="btn btn btn-outline-secondary btn-sm mt-3 w-50 fix">Añadir <i
+                                        class="fas fa-plus"></i></button>
+                            </div>
+
+                            <div class="col-lg-12 d-flex justify-content-end">
+                                <button [disabled]="loadingSaveData" (click)="saveData()"
+                                    class="btn btn-primary btn-sm">
+                                    <span>Guardar</span>
+
+                                    <div *ngIf="loadingSaveData" class="spinner-border text-warning" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

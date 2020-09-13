@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AddCategoryPageComponent } from './add-category-page/add-category-page.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 
 const routes: Routes = [
   { path: '', component: CategoryListComponent },
+  { path: 'category', component: AddCategoryPageComponent },
 ];
 
 @NgModule({

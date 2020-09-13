@@ -9,7 +9,11 @@ export class Product {
         public is_available: boolean,
         public price: number,
         public category_id: number,
+        public subcategory_id: number,
+        public section_id: number,
         public category: Category,
+        public subcategory: any,
+        public section: any,
         public picture?: string,
         public id?: number,
         public menu_categories?: Array<any>

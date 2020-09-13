@@ -50,7 +50,7 @@
                                         <div class="col-md-6">
                                             <label for="">Categoría</label>
 
-                                            <select [ngClass]="{'is-invalid': isFieldInvalid('category_id'), 'is-valid': isFieldValid('category_id')}" class="form-control select-form" formControlName="category_id">
+                                            <select (change)="selectCategory($event.target.value)" [ngClass]="{'is-invalid': isFieldInvalid('category_id'), 'is-valid': isFieldValid('category_id')}" class="form-control select-form" formControlName="category_id">
                                                 <option value="">Selecciona una categoría</option>
                                                 <ng-container *ngIf="categories">
                                                     <option *ngFor="let category of categories" [value]="category.id">
@@ -65,37 +65,37 @@
                                             </div>
 
                                         </div>
-                                        <div class="col-md-6">
+                                        <div *ngIf="typeMenu >= 2" class="col-md-6">
                                             <label for="">Subcategoría</label>
 
-                                            <select [ngClass]="{'is-invalid': isFieldInvalid('category_id'), 'is-valid': isFieldValid('category_id')}" class="form-control select-form" formControlName="category_id">
+                                            <select (change)="selectSubcategory($event.target.value)" [attr.disabled]="!categorySelected ? '': null" [ngClass]="{'is-invalid': isFieldInvalid('subcategory_id'), 'is-valid': isFieldValid('subcategory_id')}" class="form-control select-form" formControlName="subcategory_id">
                                                 <option value="">Selecciona una subcategoría</option>
-                                                <ng-container *ngIf="categories">
-                                                    <option *ngFor="let category of categories" [value]="category.id">
-                                                        {{category.name}}</option>
+                                                <ng-container *ngIf="categorySelected">
+                                                    <option *ngFor="let subcategory of categorySelected.subcategories" [value]="subcategory.id">
+                                                        {{subcategory.name}}</option>
                                                 </ng-container>
                                             </select>
                                             <!-- MESSAGES ERRORS  -->
                                             <div class="invalid-feedback">
-                                                <span *ngIf="hasFieldError('category_id','required')">La subcategoría del
+                                                <span *ngIf="hasFieldError('subcategory_id','required')">La subcategoría del
                                                     producto
                                                     es requerida</span>
                                             </div>
 
                                         </div>
-                                        <div class="col-md-6">
+                                        <div *ngIf="typeMenu >= 3" class="col-md-6">
                                             <label for="">Sección</label>
 
-                                            <select [ngClass]="{'is-invalid': isFieldInvalid('category_id'), 'is-valid': isFieldValid('category_id')}" class="form-control select-form" formControlName="category_id">
+                                            <select [attr.disabled]="!subcategorySelected ? '': null" [ngClass]="{'is-invalid': isFieldInvalid('section_id'), 'is-valid': isFieldValid('section_id')}" class="form-control select-form" formControlName="section_id">
                                                 <option value="">Selecciona una sección</option>
-                                                <ng-container *ngIf="categories">
-                                                    <option *ngFor="let category of categories" [value]="category.id">
-                                                        {{category.name}}</option>
+                                                <ng-container *ngIf="subcategorySelected">
+                                                    <option *ngFor="let section of subcategorySelected.sections" [value]="section.id">
+                                                        {{section.name}}</option>
                                                 </ng-container>
                                             </select>
                                             <!-- MESSAGES ERRORS  -->
                                             <div class="invalid-feedback">
-                                                <span *ngIf="hasFieldError('category_id','required')">La sección del
+                                                <span *ngIf="hasFieldError('section_id','required')">La sección del
                                                     producto
                                                     es requerida</span>
                                             </div>

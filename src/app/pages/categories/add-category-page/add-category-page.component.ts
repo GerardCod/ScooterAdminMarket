@@ -1,3 +1,4 @@
+import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -69,7 +70,9 @@ export class AddCategoryPageComponent implements OnInit {
       this.group.markAllAsTouched();
       return;
     }
-
+    if (!this.validSubcategories()) {
+      return;
+    }
     const category = this.group.value;
     category.subcategories = this.subcatoryList;
     this.loadingSaveData = true;
@@ -87,6 +90,28 @@ export class AddCategoryPageComponent implements OnInit {
     });
 
 
+  }
+
+  validSubcategories(): boolean {
+    let isValid = true;
+    if (this.subcatoryList.length == 0) {
+      this.snackbar.open(`Agrega al menos una subcategoria`, '', {
+        duration: 4000
+      });
+      return false;
+    }
+
+    for (const subcategory of this.subcatoryList) {
+      if (subcategory.sections.length == 0) {
+        isValid = false;
+        this.snackbar.open(`La subcategoría ${subcategory.name} debe de tener al menos una sección`, '', {
+          duration: 4000
+        });
+        break;
+      }
+    }
+
+    return isValid;
   }
 
   selectSubcategory(value) {

@@ -21,6 +21,7 @@ export class DisabledComponent implements OnInit {
   pageSizeOptions: number[] = [25, 50, 75, 100];
   // MatPaginator Output
   pageEvent: PageEvent;
+  typeMenu;
 
   params = {
     limit: 15, offset: 0, search: '', ordering: '', status: 2
@@ -30,7 +31,10 @@ export class DisabledComponent implements OnInit {
     private dialog: MatDialog,
     private productService: ProductsService,
     private snackBar: MatSnackBar
-  ) { }
+  ) {
+    this.typeMenu = localStorage.getItem('type_menu');
+
+  }
 
   ngOnInit(): void {
     this.getProducts(this.params);

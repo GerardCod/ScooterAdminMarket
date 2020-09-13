@@ -30,8 +30,11 @@ export class EnabledComponent implements OnInit, OnDestroy {
     ordering: '',
     status: 1
   };
+  typeMenu;
 
-  constructor(private productService: ProductsService) { }
+  constructor(private productService: ProductsService) { 
+    this.typeMenu = localStorage.getItem('type_menu');
+  }
 
   ngOnInit(): void {
     this.getProducts(this.params);

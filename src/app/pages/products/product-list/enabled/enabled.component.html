@@ -19,7 +19,9 @@
                 <!-- Search products -->
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
-                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text" class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username" aria-describedby="basic-addon1">
+                        <input #searchInput (keyup.enter)="searchBy(searchInput.value)" type="text"
+                            class="form-control fm-size" placeholder="Buscar por nombre" aria-label="Username"
+                            aria-describedby="basic-addon1">
                         <div class="input-group-prepend cursor" (click)="searchBy(searchInput.value)">
                             <span class="input-group-text" id="basic-addon1">
                                 <i class="fas fa-search"></i>
@@ -36,7 +38,8 @@
 
             <!-- Paginator  -->
             <div class="col-lg-12 d-flex justify-content-end">
-                <mat-paginator [disabled]="!products || products.length === 0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPage($event)"></mat-paginator>
+                <mat-paginator [disabled]="!products || products.length===0" [length]="length" [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = getPage($event)"></mat-paginator>
             </div>
             <!-- End paginator -->
 
@@ -56,6 +59,8 @@
                             <th scope="col">Imagen</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Categoría</th>
+                            <th *ngIf="typeMenu >= 2" scope="col">Sucategoría</th>
+                            <th *ngIf="typeMenu >= 3" scope="col">Sección</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Disponibilidad</th>
                             <th scope="col" class="text-center">Acciones</th>
@@ -66,21 +71,25 @@
                     <tbody>
                         <tr *ngFor="let product of products ">
                             <td>
-                                <img class="img-category img-profile rounded-circle" *ngIf="product.picture" [src]="product.picture" alt="category_img">
-                                <img class="img-category img-profile rounded-circle" *ngIf="product.picture === null" src="assets/img/Bolsa.png" alt="category_img">
+                                <img class="img-category img-profile rounded-circle" *ngIf="product.picture"
+                                    [src]="product.picture" alt="category_img">
+                                <img class="img-category img-profile rounded-circle" *ngIf="product.picture === null"
+                                    src="assets/img/Bolsa.png" alt="category_img">
                             </td>
-                            <td> {{product.name}} </td>
+                            <td> {{product.name}}</td>
                             <td> {{product.category.name}}</td>
+                            <td *ngIf="typeMenu >= 2"> {{product.subcategory?.name}}</td>
+                            <td *ngIf="typeMenu >= 3"> {{product.section?.name}}</td>
                             <td> $ {{product.price }}</td>
                             <td>
                                 {{product.is_available ? 'Disponible': 'No disponible'}}
                             </td>
                             <td class="text-center">
                                 <button class="btn btn-Editt" routerLink="/products/modify/{{product.id}}">
-                                    <i class="fas fa-pencil-alt"></i> 
+                                    <i class="fas fa-pencil-alt"></i>
                                 </button>
                                 <button class="btn btn-Delete" (click)="deleteCategory(product.id, product.name)">
-                                    <i class="fas fa-lock"></i> 
+                                    <i class="fas fa-lock"></i>
                                 </button>
                             </td>
                         </tr>
@@ -89,7 +98,8 @@
 
                 </table>
             </div>
-            <app-no-found-data *ngIf="products && products.length === 0"  [message]="'No hay productos que mostrar'"></app-no-found-data>
+            <app-no-found-data *ngIf="products && products.length === 0"  [message]="'No hay productos que mostrar'">
+            </app-no-found-data>
         </div>
         <!-- End table products -->
     </div>

@@ -52,6 +52,12 @@ export class MunuCategoryDialogComponent implements OnInit {
     forms.push(this.createOptionForm());
   }
 
+  deleteOption(index) {
+    let optionsForm = this.group.get('options');
+    const forms: FormArray = optionsForm as FormArray;
+    forms.removeAt(index);
+  }
+
   saveMenuCategory() {
     // ======= VALIDACIONES ======== 
     if (this.group.invalid) {

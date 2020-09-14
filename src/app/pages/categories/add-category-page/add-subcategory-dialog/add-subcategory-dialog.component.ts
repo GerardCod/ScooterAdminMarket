@@ -4,41 +4,36 @@ import { Category } from 'src/app/models/category.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DialogData } from '../../../shared/alerts/confirm-signup-dialog/confirm-signup-dialog.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-add-category',
-  templateUrl: './add-category.component.html',
-  styleUrls: ['./add-category.component.scss']
+  selector: 'app-add-subcategory-dialog',
+  templateUrl: './add-subcategory-dialog.component.html',
+  styleUrls: ['./add-subcategory-dialog.component.scss']
 })
-export class AddCategoryComponent implements OnInit, OnDestroy {
+export class AddSubcategoryDialogComponent implements OnInit {
   builder: FormBuilder = new FormBuilder();
   group: FormGroup;
-  id: number;
+  subcategory;
+  subcategoryIndex: number;
   imageURL: string;
   storeDataSubscription: Subscription;
   categorySubscription: Subscription;
   loadingSave = false;
-<<<<<<< HEAD
-
-  constructor(
-    private categoriesService: CategoriesService,
-    private route: ActivatedRoute, private router: Router,
-=======
   typeMenu;
 
   constructor(private categoriesService: CategoriesService, private route: ActivatedRoute, private router: Router,
->>>>>>> 3dd210a5ccfbecbb8f68b6aa54f534f94f4c4399
-    public dialogRef: MatDialogRef<AddCategoryComponent>,
+    public dialogRef: MatDialogRef<AddSubcategoryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-
-    if (data.category) {
-      this.buildFormEditCtegory(data.category);
-      this.id = data.category.id;
+    
+    if (data.subcategory) {
+      this.subcategory = data.subcategory;
+      this.subcategoryIndex = data.index;
+      this.buildFormWithData(this.subcategory);
     } else {
       this.buildForm();
     }
+
 
     // this.id = this.route.snapshot.params.id;
     // console.log(this.id);
@@ -46,14 +41,14 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.typeMenu = localStorage.getItem('type_menu');
-    if (this.id) {
-      this.categorySubscription = this.categoriesService
-        .getCategoryById(Number(this.id))
-        .subscribe((data: Category) => {
-          this.group.get('name').setValue(data.name);
-          this.imageURL = data.picture;
-        });
-    }
+    /*     if (this.id) {
+          this.categorySubscription = this.categoriesService
+            .getCategoryById(Number(this.id))
+            .subscribe((data: Category) => {
+              this.group.get('name').setValue(data.name);
+              this.imageURL = data.picture;
+            });
+        } */
   }
 
   ngOnDestroy(): void {
@@ -71,14 +66,17 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
       name: ['', [Validators.required]]
     });
   }
+  buildFormWithData(subcategory): void {
+    this.group = this.builder.group({
+      name: [subcategory.name, [Validators.required]]
+    });
+  }
 
   buildFormEditCtegory(category) {
     this.group = this.builder.group({
       name: [category.name, Validators.required]
     });
   }
-
-
 
   isFieldInvalid(group: FormGroup, field: string): boolean {
     return (
@@ -102,27 +100,25 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
       category.picture = this.imageURL;
     }
 
-    if (this.id) {
+    this.saveCategory(category);
+   /*  if (this.id) {
       category.id = this.id;
       delete category.picture;
       this.updateCategory(category);
     } else {
-      this.saveCategory(category);
-    }
+    } */
   }
 
   saveCategory(category: Category): void {
-<<<<<<< HEAD
-    this.loadingSave = false;
-    this.storeDataSubscription = this.categoriesService.addCategory(category)
-      .subscribe((data: any) => {
-        this.loadingSave = true;
-        this.router.navigate(['/categories']);
-      }, (error: any) => {
-        this.loadingSave = false;
-=======
-    this.loadingSave = true;
-    this.storeDataSubscription = this.categoriesService.addCategory(category)
+    // this.loadingSave = true;
+    if (this.subcategory) {
+      console.log('entro');
+      this.dialogRef.close(category);
+    } else {
+      this.dialogRef.close(category);
+    }
+
+    /* this.storeDataSubscription = this.categoriesService.addCategory(category)
       .subscribe((data: any) => {
         this.loadingSave = false;
         this.dialogRef.close(true);
@@ -130,9 +126,8 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
         this.loadingSave = false;
         console.log(error);
         alert(error.errors.message);
->>>>>>> 3dd210a5ccfbecbb8f68b6aa54f534f94f4c4399
         console.error(error);
-      });
+      }); */
   }
 
   updateCategory(category: Category): void {

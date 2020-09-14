@@ -66,11 +66,14 @@
     <!-- PREGUNTAS  -->
     <!--  ARTICULOS -->
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-7">
         <label for="">Articulos</label>
       </div>
-      <div class="col-lg-4">
-        <label for="">Precio (opcional)</label>
+      <div class="col-lg-3">
+        <label for="">Precio</label>
+      </div>
+      <div class="col-lg-2">
+        <label for=""></label>
       </div>
     </div>
     <div formArrayName="options" *ngFor="let optionForm of optionsFormData.controls; let i = index;">
@@ -82,8 +85,11 @@
             <span *ngIf="hasFieldError(optionForm, 'name','required')">El nombre es requerido.</span>
           </div>
         </div>
-        <div class="col-lg-4 d-flex my-1 flex-column">
+        <div class="col-lg-3 d-flex my-1 flex-column">
           <input formControlName="price" type="number" class="form-control" placeholder="3">
+        </div>
+        <div class="col-lg-1 d-flex my-1 flex-column justify-content-center">
+          <i (click)="deleteOption(i)" *ngIf="i != 0" class="fas fa-trash cursor"></i>
         </div>
       </div>
     </div>

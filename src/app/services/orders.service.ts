@@ -37,7 +37,7 @@ export class OrdersService {
     const url = `${environment.HOST_APIV1}/merchants/${merchantId}/orders/${orderId}/order_ready/`;
     return this.http.put(url, {});
   }
-  
+
   cancelOrder(orderId, data) {
     const merchantId = localStorage.getItem('merchant_id');
     const url = `${environment.HOST_APIV1}/merchants/${merchantId}/orders/${orderId}/cancel_order/`;

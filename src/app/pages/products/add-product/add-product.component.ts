@@ -21,12 +21,16 @@ export class AddProductComponent implements OnInit, OnDestroy {
   imageURL: string;
   id: number;
   categories: Category[];
+  categorySelected;
+  subcategorySelected;
   storeDataSubscription: Subscription;
   categoriesSubscription: Subscription;
   productSubscription: Subscription;
   panelOpenState = false;
   loadingSave = false;
   menus = []
+  typeMenu;
+  loadingInfoProduct;
 
   constructor(
     private productsService: ProductsService,
@@ -36,22 +40,36 @@ export class AddProductComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private snack: MatSnackBar
   ) {
-    this.buildForm();
+    this.typeMenu = localStorage.getItem('type_menu');
+    if (this.typeMenu == 3) {
+      this.buildFormMenuThree();
+    }
+    else if (this.typeMenu == 2) {
+      this.buildFormMenuTwo();
+    } 
+    else {
+      this.buildForm();
+    }
     this.id = this.route.snapshot.params.id;
   }
 
   ngOnInit(): void {
     this.categoriesSubscription = this.categoriesService
-    .getCategories({status: 1})
-    .subscribe((data: any) => {
-      this.categories = data.results;
-    });
-    if (this.id) {
-      this.productSubscription = this.productsService.getProductById(this.id)
-      .subscribe((data: Product) => {
-        this.setFormData(data);
+      .getCategories({ status: 1 })
+      .subscribe((data: any) => {
+        this.categories = data.results;
+        if (this.id) {
+          this.loadingInfoProduct = true;
+          this.productSubscription = this.productsService.getProductById(this.id)
+            .subscribe((data: Product) => {
+              this.loadingInfoProduct = false;
+              this.setFormData(data);
+            }, error => {
+              this.loadingInfoProduct = false;
+            });
+        }
       });
-    }
+
   }
 
   ngOnDestroy(): void {
@@ -70,19 +88,54 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.group = this.builder.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      stock: ['', [Validators.required]],
+      stock: [100],
       price: ['', [Validators.required]],
       category_id: ['', [Validators.required]]
     });
   }
 
-  setFormData({name, description, category_id, stock, price, picture}: Product): void {
+  buildFormMenuThree() {
+    this.group = this.builder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      stock: [100],
+      price: ['', [Validators.required]],
+      category_id: ['', [Validators.required]],
+      subcategory_id: ['', [Validators.required]],
+      section_id: ['', [Validators.required]],
+    });
+  }
+  buildFormMenuTwo() {
+    this.group = this.builder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      stock: [100],
+      price: ['', [Validators.required]],
+      category_id: ['', [Validators.required]],
+      subcategory_id: ['', [Validators.required]],
+    });
+  }
+
+  selectCategory(categoryId) {
+    this.categorySelected = this.categories.find(category => category.id == categoryId);
+  }
+
+  selectSubcategory(subcategoryId) {
+    this.subcategorySelected = this.categorySelected.subcategories.find(subcategory => subcategory.id == subcategoryId);
+    console.log(this.subcategorySelected);
+  }
+
+  setFormData({ name, description, category_id, subcategory_id, section_id, stock, price, picture }: Product): void {
+    this.categorySelected = this.categories.find(category => category.id == category_id);
+    this.subcategorySelected = this.categorySelected.subcategories.find(subcategory => subcategory.id == subcategory_id);
     this.group.get('name').setValue(name);
     this.group.get('description').setValue(description);
     this.group.get('category_id').setValue(category_id);
+    this.group.get('subcategory_id').setValue(subcategory_id);
     this.group.get('stock').setValue(stock);
     this.group.get('price').setValue(price);
     this.imageURL = picture;
+    this.group.get('section_id').setValue(section_id);
   }
 
   handlePickUpImage(event: any): void {
@@ -117,31 +170,31 @@ export class AddProductComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(MunuCategoryDialogComponent, {
       disableClose: true,
       width: '40%',
-      minWidth: '300px',
+      minWidth: '400px',
       panelClass: 'custom-dialog-container'
     });
 
     dialogRef.afterClosed().subscribe(data => {
       if (typeof data == 'object') {
         this.menus.push(data);
-      } 
+      }
     });
   }
 
   saveProduct(product: Product): void {
-    if (this.menus.length > 0) {
+    if (this.menus.length > 0) {
       product.menu_categories = this.menus;
     }
     this.loadingSave = true;
     this.storeDataSubscription = this.productsService.addProduct(product)
-    .subscribe((data: any) => {
-      this.loadingSave = false;
-      this.showMessageSuccess('Se ha guardado el producto');
-      this.router.navigate(['/products']);
-    }, error => {
-      this.loadingSave = false;
-      this.showMessageError(error.error.errors.message);
-    });
+      .subscribe((data: any) => {
+        this.loadingSave = false;
+        this.showMessageSuccess('Se ha guardado el producto');
+        this.router.navigate(['/products']);
+      }, error => {
+        this.loadingSave = false;
+        this.showMessageError(error.error.errors.message);
+      });
   }
 
   showMessageError(message) {
@@ -159,10 +212,10 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   updateProduct(product: Product): void {
     this.storeDataSubscription = this.productsService.updateProduct(product)
-    .subscribe((data: any) => {
-      console.log(data);
-      this.router.navigate(['/products']);
-    });
+      .subscribe((data: any) => {
+        console.log(data);
+        this.router.navigate(['/products']);
+      });
   }
 
   isFieldInvalid(field: string): boolean {

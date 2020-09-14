@@ -13,7 +13,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class DisabledComponent implements OnInit, OnDestroy {
   categoriesSubscription: Subscription;
-  categories: Category[];
+  categories: Category[] = [];
+  typeMenu;
 
   params = {
     limit: 15,
@@ -37,6 +38,7 @@ export class DisabledComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.typeMenu = localStorage.getItem('type_menu');
     this.getCategories(this.params);
   }
 

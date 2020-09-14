@@ -28,6 +28,9 @@ export class AddSubcategoryDialogComponent implements OnInit {
     
     if (data.subcategory) {
       this.subcategory = data.subcategory;
+      if (data.subcategory.picture) {
+        this.imageURL= data.subcategory.picture;
+      }
       this.subcategoryIndex = data.index;
       this.buildFormWithData(this.subcategory);
     } else {

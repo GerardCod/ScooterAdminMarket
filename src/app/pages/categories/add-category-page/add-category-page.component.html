@@ -78,7 +78,7 @@
                                             <i class="fas fa-plus"></i></button>
                                     </div>
                                     <div class="col-lg-6 d-flex align-items-center flex-column border col-list"
-                                        *ngIf="subcategories.selectedOptions.selected[0]">
+                                        *ngIf="subcategories.selectedOptions.selected[0] && typeMenu == 3">
                                         <span>Secciones para
                                             {{subcatoryList[subcategorySelectedId].name}}</span>
                                         <span style="font-size: 90%;" class="my-5"

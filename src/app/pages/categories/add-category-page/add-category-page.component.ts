@@ -153,6 +153,7 @@ export class AddCategoryPageComponent implements OnInit {
       return false;
     }
 
+   if (this.typeMenu == 3) {
     for (const subcategory of this.subcatoryList) {
       if (subcategory.sections.length == 0) {
         isValid = false;
@@ -162,6 +163,7 @@ export class AddCategoryPageComponent implements OnInit {
         break;
       }
     }
+   }
 
     return isValid;
   }

@@ -11,6 +11,7 @@ import { DisabledComponent } from './category-list/disabled/disabled.component';
 import { AddCategoryPageComponent } from './add-category-page/add-category-page.component';
 import { AddSubcategoryDialogComponent } from './add-category-page/add-subcategory-dialog/add-subcategory-dialog.component';
 import { AddSectionDialogComponent } from './add-category-page/add-section-dialog/add-section-dialog.component';
+import { EditCategoryPageComponent } from './edit-category-page/edit-category-page.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AddSectionDialogComponent } from './add-category-page/add-section-dialo
     DisabledComponent,
     AddCategoryPageComponent,
     AddSubcategoryDialogComponent,
-    AddSectionDialogComponent
+    AddSectionDialogComponent,
+    EditCategoryPageComponent
   ],
 
   imports: [

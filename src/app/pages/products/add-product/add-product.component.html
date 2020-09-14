@@ -3,7 +3,11 @@
         <h1 class="h3 mb-0 text-gray-800">Agregar producto</h1>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="spinner-grow" role="status" *ngIf="loadingInfoProduct || !categories">
+        <span class="sr-only">Loading...</span>
+      </div>
+
+    <div class="row justify-content-center" *ngIf="!loadingInfoProduct && categories">
         <div class="col-xl-12 col-lg-12 col-md-12">
             <div class="card o-hidden border-0 shadow-lg my-3">
                 <div class="card-body px-4">
@@ -163,8 +167,8 @@
                         <div class="col-lg-5 p-5">
                             <div class="col-md-12">
                                 <div class="images d-flex justify-content-center">
-                                    <img *ngIf="imageURL" class="img-fluid image-product" [src]="imageURL" alt="category_picture">
-                                    <img *ngIf="!imageURL" class="img-fluid image-product" src="assets/images/common/no-image.png" alt="">
+                                    <img *ngIf="imageURL"  height="200" class="img-fluid image-product" [src]="imageURL" alt="category_picture">
+                                    <img *ngIf="!imageURL"  class="img-fluid image-product" src="assets/images/common/no-image.png" alt="">
                                 </div>
                             </div>
                                 <div class="col-md-12">

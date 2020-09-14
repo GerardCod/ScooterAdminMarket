@@ -21,7 +21,11 @@ export class CategoryListComponent implements OnInit {
 
   openDialogAddcategory(category = null) {
     if (this.typeMenu >= 2) {
-      this.router.navigate(['/categories/category']);
+      if (category != null) {
+        this.router.navigate(['/categories/category', category.id]);
+      } else {
+        this.router.navigate(['/categories/category']);
+      }
       return;
     } else {
       const dialogRef = this.dialog.open(AddCategoryComponent, {

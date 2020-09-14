@@ -1,6 +1,6 @@
 <h1 mat-dialog-title class="d-flex justify-content-between">
 
-    {{id != null ? 'Editar': 'Agregar' }} Subcategoría
+    {{subcategory != null ? 'Editar': 'Agregar' }} Subcategoría
     <button mat-dialog-close mat-flat-button class="btn ">
         <i class="far fa-times-circle"></i>
     </button>
@@ -13,7 +13,7 @@
             <form [formGroup]="group" class="user" (ngSubmit)="sendData(group.value)">
                 <div class="form-group">
                     <label>Nombre</label>
-                    <input formControlName="name" [ngClass]="{'is-invalid': isFieldInvalid(group, 'name'), 'is-valid': isFieldValid(group, 'name')}" type="text" class="form-control" placeholder="Nombre de la subcategoría">
+                    <input  maxlength="40" formControlName="name" [ngClass]="{'is-invalid': isFieldInvalid(group, 'name'), 'is-valid': isFieldValid(group, 'name')}" type="text" class="form-control" placeholder="Nombre de la subcategoría">
                     <!-- MESSAGES ERRORS  -->
                     <div class="invalid-feedback">
                         <span *ngIf="hasFieldError(group, 'name','required')">El nombre es requerido</span>
@@ -25,7 +25,7 @@
                         <label>Imagen</label>
                         <input type="file" class="form-control" placeholder="Elige una imagen" (change)="handlePickUpImage($event)">
                     </div>
-                    <img *ngIf="imageURL" class="img-fluid col-md-6" [src]="imageURL" alt="category_picture" width="40%">
+                    <img *ngIf="imageURL" class="img-fluid col-md-6 img-custom" [src]="imageURL" alt="category_picture">
                 </div>
                 <hr>
                 <div>

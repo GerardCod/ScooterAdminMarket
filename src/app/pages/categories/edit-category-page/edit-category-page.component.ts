@@ -5,15 +5,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
 import { CategoriesService } from 'src/app/services/categories.service';
-import { AddSectionDialogComponent } from './add-section-dialog/add-section-dialog.component';
-import { AddSubcategoryDialogComponent } from './add-subcategory-dialog/add-subcategory-dialog.component';
+import { AddSectionDialogComponent } from '../add-category-page/add-section-dialog/add-section-dialog.component';
+import { AddSubcategoryDialogComponent } from '../add-category-page/add-subcategory-dialog/add-subcategory-dialog.component';
 
 @Component({
-  selector: 'app-add-category-page',
-  templateUrl: './add-category-page.component.html',
-  styleUrls: ['./add-category-page.component.scss']
+  selector: 'app-edit-category-page',
+  templateUrl: './edit-category-page.component.html',
+  styleUrls: ['./edit-category-page.component.scss']
 })
-export class AddCategoryPageComponent implements OnInit {
+export class EditCategoryPageComponent implements OnInit {
 
   group: FormGroup;
   subcatoryList = [];
@@ -38,11 +38,8 @@ export class AddCategoryPageComponent implements OnInit {
     this.typeMenu = localStorage.getItem('type_menu');
     this.id = this.route.snapshot.params.id;
 
-    if (this.id) {
-      this.getCategory(this.id);
-    } else {
-      this.buildForm();
-    }
+    this.getCategory(this.id);
+    
   }
 
   ngOnInit(): void {
@@ -63,11 +60,6 @@ export class AddCategoryPageComponent implements OnInit {
       });
   }
 
-  buildForm() {
-    this.group = this.fb.group({
-      name: [null, Validators.required]
-    });
-  }
   buildFormWithData(category) {
     this.group = this.fb.group({
       name: [category.name, Validators.required]

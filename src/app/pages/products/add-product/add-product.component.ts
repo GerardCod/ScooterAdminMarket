@@ -30,6 +30,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   loadingSave = false;
   menus = []
   typeMenu;
+  loadingInfoProduct;
 
   constructor(
     private productsService: ProductsService,
@@ -42,7 +43,11 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.typeMenu = localStorage.getItem('type_menu');
     if (this.typeMenu == 3) {
       this.buildFormMenuThree();
-    } else {
+    }
+    else if (this.typeMenu == 2) {
+      this.buildFormMenuTwo();
+    } 
+    else {
       this.buildForm();
     }
     this.id = this.route.snapshot.params.id;
@@ -53,13 +58,18 @@ export class AddProductComponent implements OnInit, OnDestroy {
       .getCategories({ status: 1 })
       .subscribe((data: any) => {
         this.categories = data.results;
+        if (this.id) {
+          this.loadingInfoProduct = true;
+          this.productSubscription = this.productsService.getProductById(this.id)
+            .subscribe((data: Product) => {
+              this.loadingInfoProduct = false;
+              this.setFormData(data);
+            }, error => {
+              this.loadingInfoProduct = false;
+            });
+        }
       });
-    if (this.id) {
-      this.productSubscription = this.productsService.getProductById(this.id)
-        .subscribe((data: Product) => {
-          this.setFormData(data);
-        });
-    }
+
   }
 
   ngOnDestroy(): void {
@@ -95,23 +105,37 @@ export class AddProductComponent implements OnInit, OnDestroy {
       section_id: ['', [Validators.required]],
     });
   }
+  buildFormMenuTwo() {
+    this.group = this.builder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      stock: [100],
+      price: ['', [Validators.required]],
+      category_id: ['', [Validators.required]],
+      subcategory_id: ['', [Validators.required]],
+    });
+  }
 
   selectCategory(categoryId) {
-    this.categorySelected = this.categories.find(category => category.id == categoryId );
+    this.categorySelected = this.categories.find(category => category.id == categoryId);
   }
 
   selectSubcategory(subcategoryId) {
-    this.subcategorySelected = this.categorySelected.subcategories.find(subcategory => subcategory.id == subcategoryId );
+    this.subcategorySelected = this.categorySelected.subcategories.find(subcategory => subcategory.id == subcategoryId);
     console.log(this.subcategorySelected);
   }
 
-  setFormData({ name, description, category_id, stock, price, picture }: Product): void {
+  setFormData({ name, description, category_id, subcategory_id, section_id, stock, price, picture }: Product): void {
+    this.categorySelected = this.categories.find(category => category.id == category_id);
+    this.subcategorySelected = this.categorySelected.subcategories.find(subcategory => subcategory.id == subcategory_id);
     this.group.get('name').setValue(name);
     this.group.get('description').setValue(description);
     this.group.get('category_id').setValue(category_id);
+    this.group.get('subcategory_id').setValue(subcategory_id);
     this.group.get('stock').setValue(stock);
     this.group.get('price').setValue(price);
     this.imageURL = picture;
+    this.group.get('section_id').setValue(section_id);
   }
 
   handlePickUpImage(event: any): void {

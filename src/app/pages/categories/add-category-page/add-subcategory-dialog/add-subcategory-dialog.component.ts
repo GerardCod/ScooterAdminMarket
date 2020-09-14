@@ -14,7 +14,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class AddSubcategoryDialogComponent implements OnInit {
   builder: FormBuilder = new FormBuilder();
   group: FormGroup;
-  id: number;
+  subcategory;
+  subcategoryIndex: number;
   imageURL: string;
   storeDataSubscription: Subscription;
   categorySubscription: Subscription;
@@ -24,9 +25,15 @@ export class AddSubcategoryDialogComponent implements OnInit {
   constructor(private categoriesService: CategoriesService, private route: ActivatedRoute, private router: Router,
     public dialogRef: MatDialogRef<AddSubcategoryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+    
+    if (data.subcategory) {
+      this.subcategory = data.subcategory;
+      this.subcategoryIndex = data.index;
+      this.buildFormWithData(this.subcategory);
+    } else {
+      this.buildForm();
+    }
 
-
-    this.buildForm();
 
     // this.id = this.route.snapshot.params.id;
     // console.log(this.id);
@@ -57,6 +64,11 @@ export class AddSubcategoryDialogComponent implements OnInit {
   buildForm(): void {
     this.group = this.builder.group({
       name: ['', [Validators.required]]
+    });
+  }
+  buildFormWithData(subcategory): void {
+    this.group = this.builder.group({
+      name: [subcategory.name, [Validators.required]]
     });
   }
 
@@ -99,7 +111,12 @@ export class AddSubcategoryDialogComponent implements OnInit {
 
   saveCategory(category: Category): void {
     // this.loadingSave = true;
-    this.dialogRef.close(category);
+    if (this.subcategory) {
+      console.log('entro');
+      this.dialogRef.close(category);
+    } else {
+      this.dialogRef.close(category);
+    }
 
     /* this.storeDataSubscription = this.categoriesService.addCategory(category)
       .subscribe((data: any) => {

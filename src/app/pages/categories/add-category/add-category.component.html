@@ -1,8 +1,14 @@
 <h1 mat-dialog-title class="d-flex justify-content-between">
 
+<<<<<<< HEAD
+    Agregar categoría
+    <button mat-dialog-close mat-flat-button class="btn ">
+        <i class="ti ti-close"></i>
+=======
     {{id != null ? 'Editar': 'Agregar' }} Categoría
     <button mat-dialog-close mat-flat-button class="btn ">
         <i class="far fa-times-circle"></i>
+>>>>>>> 3dd210a5ccfbecbb8f68b6aa54f534f94f4c4399
     </button>
 </h1>
 
@@ -20,7 +26,11 @@
                     </div>
                 </div>
 
+<<<<<<< HEAD
+                <div class="form-row">
+=======
                 <div class="form-row" *ngIf="typeMenu >= 2">
+>>>>>>> 3dd210a5ccfbecbb8f68b6aa54f534f94f4c4399
                     <div class="form-group col-md-6">
                         <label>Imagen</label>
                         <input type="file" class="form-control" placeholder="Elige una imagen" (change)="handlePickUpImage($event)">

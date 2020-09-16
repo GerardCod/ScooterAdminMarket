@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from 'src/app/services/orders.service';
+<<<<<<< HEAD
+import { ProfileService } from 'ScooterAdminMarket/src/app/services/profile.service';
+=======
 import { ProfileService } from 'src/app/services/profile.service';
+>>>>>>> 3dd210a5ccfbecbb8f68b6aa54f534f94f4c4399
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

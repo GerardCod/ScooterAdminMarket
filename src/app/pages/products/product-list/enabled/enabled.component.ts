@@ -59,7 +59,7 @@ export class EnabledComponent implements OnInit, OnDestroy {
           .subscribe(data => {
             this.getProducts(this.params);
             Swal.fire({
-              title: 'Bloqueado',
+              title: 'Desactivado',
               type: 'success',
               text: 'El producto ha sido desactivado',
               timer: 1500

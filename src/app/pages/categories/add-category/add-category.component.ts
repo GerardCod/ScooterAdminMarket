@@ -20,9 +20,16 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   storeDataSubscription: Subscription;
   categorySubscription: Subscription;
   loadingSave = false;
+<<<<<<< HEAD
+
+  constructor(
+    private categoriesService: CategoriesService,
+    private route: ActivatedRoute, private router: Router,
+=======
   typeMenu;
 
   constructor(private categoriesService: CategoriesService, private route: ActivatedRoute, private router: Router,
+>>>>>>> 3dd210a5ccfbecbb8f68b6aa54f534f94f4c4399
     public dialogRef: MatDialogRef<AddCategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
@@ -105,6 +112,15 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   }
 
   saveCategory(category: Category): void {
+<<<<<<< HEAD
+    this.loadingSave = false;
+    this.storeDataSubscription = this.categoriesService.addCategory(category)
+      .subscribe((data: any) => {
+        this.loadingSave = true;
+        this.router.navigate(['/categories']);
+      }, (error: any) => {
+        this.loadingSave = false;
+=======
     this.loadingSave = true;
     this.storeDataSubscription = this.categoriesService.addCategory(category)
       .subscribe((data: any) => {
@@ -114,6 +130,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
         this.loadingSave = false;
         console.log(error);
         alert(error.errors.message);
+>>>>>>> 3dd210a5ccfbecbb8f68b6aa54f534f94f4c4399
         console.error(error);
       });
   }

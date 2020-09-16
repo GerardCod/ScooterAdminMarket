@@ -30,10 +30,7 @@ export class EnabledComponent implements OnInit, OnDestroy {
     ordering: '',
     status: 1
   };
-<<<<<<< HEAD
-=======
   typeMenu;
->>>>>>> 3dd210a5ccfbecbb8f68b6aa54f534f94f4c4399
 
   constructor(private productService: ProductsService) { 
     this.typeMenu = localStorage.getItem('type_menu');
@@ -49,13 +46,8 @@ export class EnabledComponent implements OnInit, OnDestroy {
 
   deleteCategory(id, name) {
     Swal.fire({
-<<<<<<< HEAD
-      title: 'Bloquear',
-      text: `Esta seguro de bloquear a: ${name}`,
-=======
       title: 'Desactivar',
       text: `Esta seguro de desactivar a: ${name}`,
->>>>>>> 3dd210a5ccfbecbb8f68b6aa54f534f94f4c4399
       type: 'warning',
       showConfirmButton: true,
       confirmButtonText: 'Bloquear',
@@ -65,15 +57,6 @@ export class EnabledComponent implements OnInit, OnDestroy {
       if (resp.value) {
         this.productService.deleteProduct(id)
           .subscribe(data => {
-<<<<<<< HEAD
-            Swal.fire({
-              title: 'Bloqueado',
-              type: 'success',
-              text: 'El repartidor ha sido bloqueado',
-              timer: 1500
-            });
-            this.getProducts(this.params);
-=======
             this.getProducts(this.params);
             Swal.fire({
               title: 'Bloqueado',
@@ -81,7 +64,6 @@ export class EnabledComponent implements OnInit, OnDestroy {
               text: 'El producto ha sido desactivado',
               timer: 1500
             });
->>>>>>> 3dd210a5ccfbecbb8f68b6aa54f534f94f4c4399
           });
       }
     });

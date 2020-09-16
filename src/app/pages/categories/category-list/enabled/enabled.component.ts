@@ -14,10 +14,7 @@ import Swal from 'sweetalert2';
 export class EnabledComponent implements OnInit, OnDestroy {
   categoriesSubscription: Subscription;
   categories: Category[];
-<<<<<<< HEAD
-=======
   typeMenu;
->>>>>>> 3dd210a5ccfbecbb8f68b6aa54f534f94f4c4399
   @Output() openEditDialog = new EventEmitter<Category>();
 
   params = {
@@ -32,7 +29,7 @@ export class EnabledComponent implements OnInit, OnDestroy {
   length = 100;
   pageSize = 25;
   pageSizeOptions: number[] = [25, 50, 75, 100];
-  // MatPaginator Output
+  // MatPaginator Outpute
   pageEvent: PageEvent;
 
   constructor(private categoriesService: CategoriesService, private dialog: MatDialog) { }

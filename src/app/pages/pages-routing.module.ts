@@ -10,6 +10,25 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
+<<<<<<< HEAD
+=======
+    path: 'orders',
+    loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
+  },
+  {
+    path: 'categories',
+    loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
+  },
+  {
+    path: 'products',
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
+  },
+  {
+    path: 'clients',
+    loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule)
+  },
+  {
+>>>>>>> 52d2357f8ed63fa36c5ee9a69dbceb0244e8c2a3
     path: 'orders',
     canActivate: [AuthGuard, RefreshTokenGuard],
     loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)

@@ -98,10 +98,15 @@
                             </td>
                             <td>${{order.order_price | number : '1.2-2'}}</td>
                             <td>
+<<<<<<< HEAD
                                 <span *ngIf="order.order_status.slug_name == 'delivered'
                                 || order.order_status.slug_name == 'preparing_order'
                                  || order.order_status.slug_name == 'order_ready'; else elseBlock ">{{order.order_status.name}}</span>
                                 <ng-template #elseBlock>Recogido por el repartidor</ng-template>
+=======
+                                <span *ngIf="order.order_status.slug_name == 'delivered'">{{order.order_status.name}}</span>
+                                <span *ngIf="order.order_status.slug_name != 'delivered'">Recogido por el repartidor</span>
+>>>>>>> 52d2357f8ed63fa36c5ee9a69dbceb0244e8c2a3
                             </td>
                             <td class="d-flex flex-column">
                                 <button [disabled]="loadingOrderReady" (click)="orderReady(order)" style="font-size: 90%;" class="btn btn-success mb-1">

@@ -14,6 +14,10 @@ export class OrdersService {
     const url = `${environment.HOST_APIV1}/merchants/${merchantId}/orders/`;
     return this.http.get(url, { params });
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 52d2357f8ed63fa36c5ee9a69dbceb0244e8c2a3
   getOrdersId(orderId: number) {
     const merchantId = localStorage.getItem('merchant_id');
     const url = `${environment.HOST_APIV1}/merchants/${merchantId}/orders/${orderId}/`;

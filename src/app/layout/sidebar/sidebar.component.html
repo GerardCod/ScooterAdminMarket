@@ -4,7 +4,6 @@
     <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/dashboard" routerLinkActive="active">
         <div>
         </div>
-        <p> {{ merchant.merchant_name |slice:0:0 |lowercase }} </p>
         <div style="font-family: 'slant'; font-size: 150%;" class="sidebar-brand-text mx-3">SCOOTER</div>
     </a>
     <!-- Divider -->
@@ -17,6 +16,7 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
+    <!-- Nav Item - Fin Dashboard Collapso Menu -->
     <hr class="sidebar-divider">
 
 
@@ -61,17 +61,27 @@
             <span>Productos</span>
         </a>
     </li>
-    <!-- Fin Nav Item - Map the traicing Collapse Menu -->
+    <!-- Fin Nav Item - Categories Collapse Menu -->
 
 
+<<<<<<< HEAD
     <!-- Nav Item - Delivery Collapse Menu -->
     <!-- <li class="nav-item" routerLink="/delivery/list" routerLinkActive="active">
+=======
+    <!-- Nav Item - Products Collapse Menu -->
+    <li class="nav-item" routerLink="/products" routerLinkActive="active">
+>>>>>>> 52d2357f8ed63fa36c5ee9a69dbceb0244e8c2a3
         <a class="nav-link collapsed">
-            <i class="fas fa-fw fa-car"></i>
-            <span>Repartidores</span>
+            <i class="fas fa-box"></i>
+            <span>Productos</span>
         </a>
+<<<<<<< HEAD
     </li> -->
     <!-- Nav Item - Fin the Delivery Collapse Menu -->
+=======
+    </li>
+    <!-- Fin Nav Item - Fin Products Collapse Menu -->
+>>>>>>> 52d2357f8ed63fa36c5ee9a69dbceb0244e8c2a3
 
 
     <!-- Nav Item - Clients Collapse Menu -->
@@ -84,23 +94,32 @@
     <!-- Nav Item - Fin the Clients Collapse Menu  -->
 
 
+    <!-- Nav Item - Delivery Collapse Menu -->
+    <li class="nav-item" routerLink="/delivery/list" routerLinkActive="active">
+        <a class="nav-link collapsed">
+            <i class="fas fa-fw fa-car"></i>
+            <span>Repartidores</span>
+        </a>
+    </li>
+    <!-- Nav Item - Fin the Delivery Collapse Menu -->
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">
-
     <!-- Heading -->
     <div class="sidebar-heading">
         Informes
     </div>
 
 
+    <!-- Nav Item - Setting Collapse Menu -->
     <li class="nav-item" routerLink="/profile" routerLinkActive="active">
         <a class="nav-link collapsed">
             <i class="fas fa-fw fa-cog"></i>
             <span>Configuración</span>
         </a>
-
     </li>
+    <!-- Nav Item - Fin Setting Collapse Menu -->
 
 
     <!-- Sidebar Toggler (Sidebar) -->

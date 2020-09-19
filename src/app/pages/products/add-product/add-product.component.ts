@@ -131,10 +131,10 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.group.get('name').setValue(name);
     this.group.get('description').setValue(description);
     this.group.get('category_id').setValue(category_id);
-    this.group.get('subcategory_id').setValue(subcategory_id);
     this.group.get('stock').setValue(stock);
     this.group.get('price').setValue(price);
     this.imageURL = picture;
+    this.group.get('subcategory_id').setValue(subcategory_id);
     this.group.get('section_id').setValue(section_id);
   }
 

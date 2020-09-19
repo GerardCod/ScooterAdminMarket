@@ -73,6 +73,7 @@
                             </td>
                             <td> {{product.name}}</td>
                             <td> {{product.category.name}}</td>
+
                             <td *ngIf="typeMenu >= 2"> {{product.subcategory?.name}}</td>
                             <td *ngIf="typeMenu >= 3"> {{product.section?.name}}</td>
                             <td> $ {{product.price }}</td>
@@ -93,8 +94,9 @@
 
                 </table>
             </div>
-            <app-no-found-data *ngIf="products && products.length === 0"  [message]="'No hay productos que mostrar'">
+            <app-no-found-data *ngIf="!products || products.length === 0"  [message]="'No hay productos que mostrar'">
             </app-no-found-data>
+
         </div>
         <!-- End table products -->
     </div>

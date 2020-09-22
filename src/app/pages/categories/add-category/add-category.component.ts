@@ -71,8 +71,6 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
     });
   }
 
-
-
   isFieldInvalid(group: FormGroup, field: string): boolean {
     return (
       (group.get(field).invalid && group.get(field).touched)

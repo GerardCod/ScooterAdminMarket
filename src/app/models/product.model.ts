@@ -16,6 +16,10 @@ export class Product {
         public section: any,
         public picture?: string,
         public id?: number,
-        public menu_categories?: Array<any>
+        public menu_categories?: Array<any>,
+        public menu_categories_add?: Array<any>,
+        public menu_categories_update?: Array<any>,
+        public menu_categories_delete?: Array<any>,
+        public menu_categories_active?: Array<any>,
     ) {}
 }

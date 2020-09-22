@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-flex-start mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Agregar producto</h1>
+        <h1 class="h3 mb-0 text-gray-800">{{id ? 'Editar': 'Agregar'}} producto</h1>
     </div>
 
     <div class="spinner-grow" role="status" *ngIf="loadingInfoProduct || !categories">
@@ -110,14 +110,22 @@
 
                                                 <div class="form-row">
                                                     <div class="col-md-12 d-flex flex-column">
-                                                        <label style="font-weight: bold;" for="">Menú avanzado(opcional)</label>
+                                                        <label style="font-weight: bold;" for="">Menú avanzado(opcional)
+                                                             <i class="fas fa-info-circle cursor"
+                                                            #tooltip="matTooltip"
+                                                            matTooltipHideDelay="100000"
+                                                            matTooltip="Para que el cliente pueda elegir con una serie de opciones"
+                                                            [matTooltipPosition]="'above'"></i> </label>
                                                         <button (click)="openMenuDialog()" type="button" class="btn btn-outline-primary">Agregar grupo modificador</button>
                                                         <!-- MENÚ GUARDADO  -->
                                                         <mat-accordion class="my-2">
-                                                            <mat-expansion-panel *ngFor="let menu of menus">
+                                                            <mat-expansion-panel *ngFor="let menu of menus; let i = index">
                                                                 <mat-expansion-panel-header>
                                                                     <mat-panel-title>
                                                                         {{menu.name}}
+                                                                        <span *ngIf="menu.status?.slug_name == 'inactive' || menu.to_disable"
+                                                                         class="badge badge-danger mx-3">Desactivado</span>
+
                                                                     </mat-panel-title>
                                                                 </mat-expansion-panel-header>
                                                                 <!--  ARTICULOS -->
@@ -138,6 +146,15 @@
                                                                             <span>{{option.price}}</span>
                                                                         </div>
                                                                     </div>
+                                                                </div>
+                                                                <div *ngIf="menu.to_disable == false || (menu.status && menu.status?.slug_name != 'inactive')" class="row mt-3 d-flex justify-content-end">
+                                                                    <button type="button" (click)="disabledMenuCategory(menu, i)" class="btn btn-danger btn-sm mx-2">
+                                                                        {{menu.id ? 'Desactivar': 'Eliminar'}}
+                                                                        <i class="fas fa-trash"></i></button>
+                                                                    <button type="button" (click)="editMenuCategory(menu, i)" class="btn btn-primary btn-sm">Editar <i class="fas fa-edit"></i></button>
+                                                                </div>
+                                                                <div *ngIf="menu.status?.slug_name == 'inactive' || menu.to_disable " class="row mt-3 d-flex justify-content-end">
+                                                                    <button type="button" (click)="enableMenuCategory(menu)" class="btn btn-success btn-sm mx-2">Volver a activar <i class="fas fa-unlock"></i></button>
                                                                 </div>
                                                                 <!-- TERMINA ARTICULOS  -->
                                                             </mat-expansion-panel>

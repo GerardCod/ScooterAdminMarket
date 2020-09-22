@@ -7,7 +7,7 @@ import { EditCategoryPageComponent } from './edit-category-page/edit-category-pa
 const routes: Routes = [
   { path: '', component: CategoryListComponent },
   { path: 'category', component: AddCategoryPageComponent },
-  { path: 'category/:id', component: EditCategoryPageComponent },
+  { path: 'category/:id', component: AddCategoryPageComponent },
 ];
 
 @NgModule({

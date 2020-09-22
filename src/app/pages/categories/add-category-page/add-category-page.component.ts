@@ -53,6 +53,7 @@ export class AddCategoryPageComponent implements OnInit {
     this.categoriesService.getCategoryById(id)
       .subscribe((data) => {
         this.buildFormWithData(data);
+        this.category = data;
         if (data.picture) {
           this.imageURL = data.picture;
         }
@@ -65,11 +66,13 @@ export class AddCategoryPageComponent implements OnInit {
 
   buildForm() {
     this.group = this.fb.group({
+      id: [null],
       name: [null, Validators.required]
     });
   }
   buildFormWithData(category) {
     this.group = this.fb.group({
+      id: [category.id],
       name: [category.name, Validators.required]
     });
   }
@@ -122,13 +125,27 @@ export class AddCategoryPageComponent implements OnInit {
       this.group.markAllAsTouched();
       return;
     }
+    const category = this.group.value;
+
+    if (!/'https'/.test(this.imageURL)) {
+      category.picture = this.imageURL;
+    }
+
+
+    if (this.category) {
+      this.updateCategory(category);
+      return;
+    }
+
     if (!this.validSubcategories()) {
       return;
     }
-    const category = this.group.value;
+
+    if (this.imageURL != null) {
+      category.picture = this.imageURL;
+    }
     category.subcategories = this.subcatoryList;
     this.loadingSaveData = true;
-
     this.categoriesService.addCategory(category)
       .subscribe((data: any) => {
         this.loadingSaveData = false;
@@ -144,6 +161,24 @@ export class AddCategoryPageComponent implements OnInit {
 
   }
 
+  updateCategory(category: Category): void {
+    this.loadingSaveData = true;
+    this.categoriesService.updateCategory(category)
+      .subscribe((data: any) => {
+        this.router.navigate['/categories'];
+        this.snackbar.open('Categoría actualizada', '', {
+          duration: 3000
+        });
+      },
+        (error: any) => {
+          this.loadingSaveData = false;
+          this.snackbar.open(error.errors.message, '', {
+            duration: 3000,
+            panelClass: 'error-snackbar'
+          });
+        });
+  }
+
   validSubcategories(): boolean {
     let isValid = true;
     if (this.subcatoryList.length == 0) {
@@ -153,17 +188,17 @@ export class AddCategoryPageComponent implements OnInit {
       return false;
     }
 
-   if (this.typeMenu == 3) {
-    for (const subcategory of this.subcatoryList) {
-      if (subcategory.sections.length == 0) {
-        isValid = false;
-        this.snackbar.open(`La subcategoría ${subcategory.name} debe de tener al menos una sección`, '', {
-          duration: 4000
-        });
-        break;
+    if (this.typeMenu == 3) {
+      for (const subcategory of this.subcatoryList) {
+        if (subcategory.sections.length == 0) {
+          isValid = false;
+          this.snackbar.open(`La subcategoría ${subcategory.name} debe de tener al menos una sección`, '', {
+            duration: 4000
+          });
+          break;
+        }
       }
     }
-   }
 
     return isValid;
   }

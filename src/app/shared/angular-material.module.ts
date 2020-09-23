@@ -20,6 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -45,7 +46,8 @@ const components = [
   MatProgressSpinnerModule,
   MatRadioModule,
   MatExpansionModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatMenuModule
 ];
 
 @NgModule({

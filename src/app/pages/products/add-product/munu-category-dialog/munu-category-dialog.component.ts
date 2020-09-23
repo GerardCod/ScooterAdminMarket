@@ -17,6 +17,7 @@ export class MunuCategoryDialogComponent implements OnInit {
 
   // Is update
   menu;
+  options_to_delete;
 
   constructor(public dialogRef: MatDialogRef<MunuCategoryDialogComponent>,
     private fb: FormBuilder, private snack: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -39,9 +40,11 @@ export class MunuCategoryDialogComponent implements OnInit {
     this.group.get('is_range').setValue(String(is_range));
     this.group.get('id').setValue(id);
     if (is_range == true || is_range == 'true') {
+      this.isRange = true;
       this.group.get('min_options_choose').setValue(min_options_choose);
       this.group.get('max_options_choose').setValue(max_options_choose);
     } else {
+      this.isRange = false;
       this.group.get('limit_options_choose').setValue(limit_options_choose);
     }
 
@@ -122,17 +125,19 @@ export class MunuCategoryDialogComponent implements OnInit {
     forms.removeAt(index);
   }
 
-  disabledOption(idx) {
+  deleteOptionUpdate(menu, idx) {
     Swal.fire({
       title: 'Desactivar opcion',
       text: `¿Esta seguro de desactivarlo?`,
       type: 'warning',
       showConfirmButton: true,
-      confirmButtonText: 'Bloquear',
+      confirmButtonText: 'Eliminar',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
     }).then(resp => {
-      
+      let optionsForm = this.group.get('options');
+      const forms: FormArray = optionsForm as FormArray;
+      forms.removeAt(idx);
     });
   }
 

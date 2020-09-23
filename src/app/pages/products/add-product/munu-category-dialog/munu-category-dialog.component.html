@@ -1,14 +1,15 @@
 <form class="px-5 py-4" [formGroup]="group">
   <input type="hidden" formControlName="id">
   <div class="form-group d-flex flex-column">
-      <div class="d-flex">
-        <input autofocus="off" style="height: 45px;" formControlName="name" [ngClass]="{'is-invalid': isFieldInvalid(group, 'name')}" type="text"
-          class="form-control" placeholder="ejem: ¿DESEAS AGREGARLE ALGO MÁS?">
+    <div class="d-flex">
+      <input autofocus="off" style="height: 45px;" formControlName="name"
+        [ngClass]="{'is-invalid': isFieldInvalid(group, 'name')}" type="text" class="form-control"
+        placeholder="ejem: ¿DESEAS AGREGARLE ALGO MÁS?">
 
-          <div style="height: 45px;" class="input-group-prepend">
-            <div class="input-group-text"><i class="fas fa-pencil-alt"></i></div>
-          </div>
+      <div style="height: 45px;" class="input-group-prepend">
+        <div class="input-group-text"><i class="fas fa-pencil-alt"></i></div>
       </div>
+    </div>
     <!-- MESSAGES ERRORS  -->
     <div class="invalid-feedback">
       <span *ngIf="hasFieldError(group, 'name','required')">El nombre es requerido.</span>
@@ -59,7 +60,8 @@
           <mat-radio-button class="mr-4" value="true">Requerido</mat-radio-button>
           <mat-radio-button value="false">Opcional</mat-radio-button>
         </mat-radio-group>
-        <div style="color: red; font-size: 90%; margin-left: 20px" *ngIf="isFieldInvalid(group, 'is_obligatory')" class="invalid-div">
+        <div style="color: red; font-size: 90%; margin-left: 20px" *ngIf="isFieldInvalid(group, 'is_obligatory')"
+          class="invalid-div">
           <span *ngIf="hasFieldError(group, 'is_obligatory','required')">Selecciona una opción.</span>
         </div>
       </div>
@@ -90,11 +92,19 @@
         <div class="col-lg-3 d-flex my-1 flex-column">
           <input formControlName="price" type="number" class="form-control" placeholder="3">
         </div>
-        <div *ngIf="!menu || optionForm.get('option_id').value == null" class="col-lg-1 d-flex my-1 flex-column justify-content-center">
+        <div *ngIf="!menu || optionForm.get('option_id').value == null"
+          class="col-lg-1 d-flex my-1 flex-column justify-content-center">
           <i (click)="deleteOption(i)" *ngIf="i != 0" class="fas fa-trash cursor"></i>
         </div>
-        <div *ngIf="menu && optionForm.get('option_id').value != null" class="col-lg-1 d-flex my-1 flex-column justify-content-center">
-          <i (click)="disabledOption(i)" class="fas fa-lock cursor"></i>
+        <div *ngIf="menu && optionForm.get('option_id').value != null"
+          class="col-lg-1 d-flex my-1 flex-column justify-content-center">
+          <button mat-button [matMenuTriggerFor]="menu">
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button  mat-menu-item>Desactivar</button>
+            <button (click)="deleteOptionUpdate(menu, i)" mat-menu-item>Eliminar</button>
+          </mat-menu>
         </div>
       </div>
     </div>
